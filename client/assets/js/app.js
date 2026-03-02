@@ -1,14 +1,14 @@
 // DATASET
 const categorias = [
-  { id: 'harinas', nombre: 'Harinas', cocina: 'latina' },
-  { id: 'frijoles', nombre: 'Frijoles', cocina: 'latina' },
-  { id: 'conservas-lat', nombre: 'Conservas Latinas', cocina: 'latina' },
-  { id: 'especias', nombre: 'Especias', cocina: 'arabe' },
-  { id: 'legumbres', nombre: 'Legumbres', cocina: 'arabe' },
-  { id: 'conservas-ar', nombre: 'Conservas Árabes', cocina: 'arabe' },
-  { id: 'arroces', nombre: 'Arroces Especiales', cocina: 'asiatica' },
-  { id: 'salsas', nombre: 'Salsas y Condimentos', cocina: 'asiatica' },
-  { id: 'fideos', nombre: 'Fideos', cocina: 'asiatica' }
+  { id: 'harinas', nombre: 'Harinas', cocina: 'latina', micro: 'Maíz precocido, trigo y mezclas' },
+  { id: 'frijoles', nombre: 'Frijoles', cocina: 'latina', micro: 'Negros, rojos, pintos a granel' },
+  { id: 'conservas-lat', nombre: 'Conservas Latinas', cocina: 'latina', micro: 'Ajíes, salsas y purés' },
+  { id: 'especias', nombre: 'Especias', cocina: 'arabe', micro: 'Mezclas y monovarietales' },
+  { id: 'legumbres', nombre: 'Legumbres', cocina: 'arabe', micro: 'Garbanzos, lentejas y habas' },
+  { id: 'conservas-ar', nombre: 'Conservas Árabes', cocina: 'arabe', micro: 'Tahini, harissa y más' },
+  { id: 'arroces', nombre: 'Arroces Especiales', cocina: 'asiatica', micro: 'Jazmín, basmati y glutinoso' },
+  { id: 'salsas', nombre: 'Salsas y Condimentos', cocina: 'asiatica', micro: 'Soja, ostras, sriracha' },
+  { id: 'fideos', nombre: 'Fideos', cocina: 'asiatica', micro: 'De arroz, trigo y soba' }
 ];
 
 const productos = [
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initReveal();
   initTabs();
+  initChips();
   
   // Rutas especificas
   if (document.getElementById('grid-cat-latina')) initHome();
@@ -83,72 +84,128 @@ function initReveal() {
   reveals.forEach(el => observer.observe(el));
 }
 
-// Tabs (Home)
+// Tabs (Home) with keyboard navigation
 function initTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
   if (!tabBtns.length) return;
-  
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remover active
-      tabBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      
-      // Activar click
-      btn.setAttribute('aria-selected', 'true');
-      document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+
+  function activateTab(btn) {
+    tabBtns.forEach(b => { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); });
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.setAttribute('aria-selected', 'true');
+    btn.setAttribute('tabindex', '0');
+    btn.focus();
+    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+  }
+
+  tabBtns.forEach((btn, i) => {
+    btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
+    btn.addEventListener('click', () => activateTab(btn));
+    btn.addEventListener('keydown', (e) => {
+      const tabs = Array.from(tabBtns);
+      let idx = tabs.indexOf(btn);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); activateTab(tabs[(idx + 1) % tabs.length]); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); activateTab(tabs[(idx - 1 + tabs.length) % tabs.length]); }
+      if (e.key === 'Home') { e.preventDefault(); activateTab(tabs[0]); }
+      if (e.key === 'End') { e.preventDefault(); activateTab(tabs[tabs.length - 1]); }
+    });
+  });
+}
+
+// Chip filters for inspiration carousel
+function initChips() {
+  const chips = document.querySelectorAll('#receta-chips .chip');
+  if (!chips.length) return;
+
+  function renderCarousel(cocina) {
+    const carousel = document.getElementById('home-recetas-carousel');
+    if (!carousel) return;
+    const filtered = cocina === 'todas' ? recetas : recetas.filter(r => r.cocina === cocina);
+    carousel.innerHTML = filtered.map(r => `
+      <div class="card" data-testid="card-receta-${r.id}">
+        <div class="card-img">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="card-body">
+          <span class="badge" style="text-transform: capitalize;">${r.cocina}</span>
+          <h4 style="margin-bottom: 0.5rem;">${r.titulo}</h4>
+          <a href="/recetas/receta.html?id=${r.id}" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Ver aplicación →</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderCarousel(chip.dataset.cocina);
     });
   });
 }
 
 // HOME
 function initHome() {
-  // Render Categorías y Destacados en Tabs
   const cocinas = ['latina', 'arabe', 'asiatica'];
-  
+
+  const catIcons = {
+    harinas: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>',
+    frijoles: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>',
+    'conservas-lat': '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+    especias: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    legumbres: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>',
+    'conservas-ar': '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>',
+    arroces: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 3v18"/><path d="M18 9a6 6 0 0 0-12 0c0 5 6 9 6 9s6-4 6-9z"/></svg>',
+    salsas: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M8 2h8l4 10H4L8 2z"/><path d="M4 12v6a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-6"/></svg>',
+    fideos: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  };
+
   cocinas.forEach(cocina => {
     const cats = categorias.filter(c => c.cocina === cocina);
     const catGrid = document.getElementById(`grid-cat-${cocina}`);
     if (catGrid) {
       catGrid.innerHTML = cats.map(c => `
-        <a href="/productos/index.html?cocina=${cocina}&categoria=${c.id}" class="category-tile">
-          ${c.nombre}
+        <a href="/productos/index.html?cocina=${cocina}&categoria=${c.id}" class="category-tile" data-testid="tile-${c.id}">
+          <span class="tile-icon">${catIcons[c.id] || ''}</span>
+          <span class="tile-name">${c.nombre}</span>
+          <span class="tile-micro">${c.micro || ''}</span>
+          <span class="tile-arrow">Ver productos →</span>
         </a>
       `).join('');
     }
-    
-    const prods = productos.filter(p => p.cocina === cocina).slice(0, 3);
+
+    const prods = productos.filter(p => p.cocina === cocina).slice(0, 6);
     const prodGrid = document.getElementById(`grid-prod-${cocina}`);
     if (prodGrid) {
       prodGrid.innerHTML = prods.map(p => `
-        <div class="card">
-          <div class="card-img" style="background: var(--surface); border-bottom: 1px solid var(--border);">
-            <span style="font-size: 3rem; opacity: 0.2;">📸</span>
+        <div class="card" data-testid="card-product-${p.id}">
+          <div class="card-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           </div>
           <div class="card-body">
             <span class="badge">${p.formato}</span>
-            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">${p.nombre}</h4>
-            <div style="margin-top: auto; padding-top: 1rem;">
-              <a href="/contacto.html" class="text-primary font-semibold" style="font-size: 0.9rem;">Solicitar ficha</a>
+            <h4 style="margin-bottom: 0.35rem;">${p.nombre}</h4>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom: 0.75rem;">
+              ${p.etiquetas.map(e => `<span style="font-size:0.75rem; background:var(--bg); padding:0.15rem 0.5rem; border-radius:4px; color:var(--muted);">${e}</span>`).join('')}
             </div>
+            <a href="/contacto.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Solicitar ficha →</a>
           </div>
         </div>
       `).join('');
     }
   });
 
-  // Render Carrusel Recetas
   const carousel = document.getElementById('home-recetas-carousel');
   if (carousel) {
     carousel.innerHTML = recetas.map(r => `
-      <div class="card">
-        <div class="card-img" style="background: var(--surface);">
-            <span style="font-size: 3rem; opacity: 0.2;">🍲</span>
+      <div class="card" data-testid="card-receta-${r.id}">
+        <div class="card-img">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
         <div class="card-body">
-          <span class="badge">${r.cocina}</span>
+          <span class="badge" style="text-transform: capitalize;">${r.cocina}</span>
           <h4 style="margin-bottom: 0.5rem;">${r.titulo}</h4>
-          <a href="/recetas/receta.html?id=${r.id}" class="text-primary font-semibold" style="font-size: 0.9rem; margin-top: auto;">Ver aplicación</a>
+          <a href="/recetas/receta.html?id=${r.id}" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Ver aplicación →</a>
         </div>
       </div>
     `).join('');
