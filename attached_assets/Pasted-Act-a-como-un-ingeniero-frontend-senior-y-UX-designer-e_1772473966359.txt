@@ -1,0 +1,41 @@
+Actúa como un ingeniero frontend senior y UX designer especializado en B2B catalogs. Rediseña SOLO la sección “Explorador de Cocinas” del HOME para que sea un módulo tipo “Command Center” (herramienta de descubrimiento) con estructura 3-panel. No toques hero, ni capacidades, ni calidad, ni recetas, ni footer.
+
+REGLAS
+- Mantén el proyecto en HTML/CSS/JS vanilla, sin librerías.
+- Mantén la paleta Spice Market Premium: bg #FFF6ED, surface #FFF, text #1F2937, border #E7E5E4, primary #C2410C, hover #9A3412, accent #D4A017, ink #0F172A.
+- No uses imágenes externas ni CDNs.
+- Mantén IDs existentes si ya se usan en app.js (grid-cat-*, grid-prod-*, panel-*). Si necesitas nuevos contenedores, añádelos sin romper los actuales.
+
+OBJETIVO UX (OBLIGATORIO)
+- Que el usuario entienda en 2 segundos el flujo:
+  1) elegir cocina
+  2) elegir categoría
+  3) ver productos
+- Integrar búsqueda dentro del módulo para filtrar categorías/productos (solo dentro del explorador).
+- Mantener CTA principal: “Solicitar catálogo” y acción secundaria: “Abrir catálogo completo”.
+
+NUEVA ESTRUCTURA (DENTRO DEL EXPLORADOR)
+1) Topbar del módulo (dentro del panel):
+   - Input search: placeholder “Busca producto o categoría…”
+   - Botón primario: “Solicitar catálogo”
+   - Link secundario: “Abrir catálogo completo”
+   - Microcopy: “Fichas técnicas bajo solicitud · 24–48h”
+
+2) Body en 3 columnas (desktop) y 1 columna (mobile):
+   - Col 1 (Cocinas): selector vertical tipo “segmented” con 3 opciones (Latina/Árabe/Asiática).
+     * Al seleccionar, actualiza lista de categorías y productos.
+   - Col 2 (Categorías): lista/tiles compactos con icono + nombre + “→”
+     * Al click, aplica filtro de categoría y resalta la categoría activa.
+   - Col 3 (Vista previa): grid de productos (2 columnas) con badges (formato + canal + certificación).
+     * Título dinámico: “Productos destacados” o “Productos en {Categoría}”
+     * Botón “Solicitar ficha” (abre modal existente si lo hay, si no, deja link a contacto).
+
+3) Bottom row: “Aplicaciones” como 3–4 callouts.
+
+COMPORTAMIENTO JS (VANILLA, SOLO EN HOME)
+- Estado: cocinaActiva, categoriaActiva, queryTexto.
+- Cocina activa cambia categorías y productos.
+- Categoría activa filtra productos en la vista previa.
+- Search filtra categorías y productos (por nombre y tags).
+- Al cambiar cocina, resetear categoríaActiva.
+- Todo accesible (aria, focus visible).

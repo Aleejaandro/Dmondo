@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initReveal();
   initTabs();
+  initSearch();
   initChips();
   
   // Rutas especificas
@@ -86,32 +87,24 @@ function initReveal() {
 
 // Tabs (Home) with keyboard navigation + category reset
 const activeCategoryByCocina = {};
+let cocinaActiva = 'latina';
+let queryTexto = '';
 
 function initTabs() {
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabBtns = document.querySelectorAll('.cc-cocina-btn');
   if (!tabBtns.length) return;
-
-  const cocinaLabels = { latina: 'Cocina Latina', arabe: 'Cocina Árabe', asiatica: 'Cocina Asiática' };
-
-  function updateCtaCocina(btn) {
-    const ctaBtn = document.getElementById('cta-cocina');
-    if (!ctaBtn) return;
-    const cocina = btn.dataset.cocina || 'latina';
-    const label = cocinaLabels[cocina] || 'Cocina Latina';
-    ctaBtn.textContent = `Solicitar catálogo de ${label}`;
-    ctaBtn.href = `/contacto.html#catalogo?cocina=${cocina}`;
-  }
 
   function activateTab(btn) {
     tabBtns.forEach(b => { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); });
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.cc-panel').forEach(p => p.classList.remove('active'));
     btn.setAttribute('aria-selected', 'true');
     btn.setAttribute('tabindex', '0');
     btn.focus();
-    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
-    updateCtaCocina(btn);
-    const cocina = btn.dataset.cocina || 'latina';
-    clearCategoryFilter(cocina);
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (panel) panel.classList.add('active');
+    cocinaActiva = btn.dataset.cocina || 'latina';
+    clearCategoryFilter(cocinaActiva);
+    applySearch();
   }
 
   tabBtns.forEach((btn, i) => {
@@ -126,6 +119,35 @@ function initTabs() {
       if (e.key === 'End') { e.preventDefault(); activateTab(tabs[tabs.length - 1]); }
     });
   });
+}
+
+function initSearch() {
+  const input = document.getElementById('cc-search');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    queryTexto = input.value.trim().toLowerCase();
+    applySearch();
+  });
+}
+
+function applySearch() {
+  const q = queryTexto;
+  const cocina = cocinaActiva;
+  const catGrid = document.getElementById(`grid-cat-${cocina}`);
+  if (!catGrid) return;
+
+  catGrid.querySelectorAll('.category-tile').forEach(tile => {
+    if (!q) {
+      tile.classList.remove('cc-hidden');
+      return;
+    }
+    const name = (tile.querySelector('.tile-name')?.textContent || '').toLowerCase();
+    const micro = (tile.querySelector('.tile-micro')?.textContent || '').toLowerCase();
+    const match = name.includes(q) || micro.includes(q);
+    tile.classList.toggle('cc-hidden', !match);
+  });
+
+  renderProducts(cocina, activeCategoryByCocina[cocina] || null, q);
 }
 
 // Chip filters for inspiration carousel
@@ -161,7 +183,7 @@ function initChips() {
 }
 
 // Category filter helpers
-function renderProducts(cocina, categoriaId) {
+function renderProducts(cocina, categoriaId, searchQuery) {
   const prodGrid = document.getElementById(`grid-prod-${cocina}`);
   if (!prodGrid) return;
   let prods = productos.filter(p => p.cocina === cocina);
@@ -171,8 +193,17 @@ function renderProducts(cocina, categoriaId) {
     prods = prods.slice(0, 6);
   }
 
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    prods = prods.filter(p =>
+      p.nombre.toLowerCase().includes(q) ||
+      p.etiquetas.some(e => e.toLowerCase().includes(q)) ||
+      p.formato.toLowerCase().includes(q)
+    );
+  }
+
   if (prods.length === 0) {
-    prodGrid.innerHTML = '<p class="text-muted" style="padding:1rem; text-align:center; grid-column:1/-1;">No hay productos en esta categoría.</p>';
+    prodGrid.innerHTML = '<p class="cc-no-results">No se encontraron productos.</p>';
     return;
   }
 
@@ -187,7 +218,7 @@ function renderProducts(cocina, categoriaId) {
         <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom: 0.75rem;">
           ${p.etiquetas.map(e => `<span style="font-size:0.75rem; background:var(--bg); padding:0.15rem 0.5rem; border-radius:4px; color:var(--muted);">${e}</span>`).join('')}
         </div>
-        <a href="/contacto.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Solicitar ficha →</a>
+        <a href="/contacto.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;" data-testid="link-ficha-${p.id}">Solicitar ficha →</a>
       </div>
     </div>
   `).join('');
@@ -197,6 +228,7 @@ function updateProdsTitle(cocina, catName) {
   const title = document.getElementById(`prods-title-${cocina}`);
   if (!title) return;
   const header = title.closest('.panel-prods-header');
+  if (!header) return;
 
   if (catName) {
     title.textContent = `Productos en ${catName}`;
@@ -204,6 +236,7 @@ function updateProdsTitle(cocina, catName) {
     if (!clearBtn) {
       clearBtn = document.createElement('button');
       clearBtn.className = 'btn-clear-filter';
+      clearBtn.type = 'button';
       clearBtn.textContent = 'Limpiar filtro ×';
       clearBtn.dataset.testid = `btn-clear-${cocina}`;
       clearBtn.addEventListener('click', () => clearCategoryFilter(cocina));
@@ -226,7 +259,7 @@ function selectCategory(cocina, catId) {
   }
   const cat = categorias.find(c => c.id === catId);
   updateProdsTitle(cocina, cat ? cat.nombre : null);
-  renderProducts(cocina, catId);
+  renderProducts(cocina, catId, queryTexto || null);
 }
 
 function clearCategoryFilter(cocina) {
@@ -236,7 +269,7 @@ function clearCategoryFilter(cocina) {
     catGrid.querySelectorAll('.category-tile').forEach(t => t.classList.remove('is-active'));
   }
   updateProdsTitle(cocina, null);
-  renderProducts(cocina, null);
+  renderProducts(cocina, null, queryTexto || null);
 }
 
 // HOME
@@ -262,9 +295,11 @@ function initHome() {
       catGrid.innerHTML = cats.map(c => `
         <button type="button" class="category-tile" data-catid="${c.id}" data-cocina="${cocina}" data-testid="tile-${c.id}">
           <span class="tile-icon">${catIcons[c.id] || ''}</span>
-          <span class="tile-name">${c.nombre}</span>
-          <span class="tile-micro">${c.micro || ''}</span>
-          <span class="tile-arrow">Ver productos →</span>
+          <span class="tile-info">
+            <span class="tile-name">${c.nombre}</span>
+            <span class="tile-micro">${c.micro || ''}</span>
+          </span>
+          <span class="tile-arrow">→</span>
         </button>
       `).join('');
 
