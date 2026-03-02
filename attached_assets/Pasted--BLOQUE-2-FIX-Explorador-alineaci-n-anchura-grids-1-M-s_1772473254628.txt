@@ -1,0 +1,142 @@
+/* ===== BLOQUE 2 FIX: Explorador (alineación + anchura + grids) ===== */
+
+/* 1) Más presencia: el shell NO debe verse estrecho */
+.section-explorador .container { max-width: 1200px; } /* solo afecta a esta sección */
+.explorador-shell{
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(15,23,42,.06);
+  padding: 22px;
+}
+
+/* 2) Top bar: tabs + CTA bien compuestos */
+.explorador-tabs{ display:block; }
+.explorador-tabs .tab-list{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom: 14px;
+}
+
+.explorador-tabs .tab-btn{
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-weight: 600;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.explorador-tabs .tab-btn[aria-selected="true"]{
+  background: rgba(194,65,12,.10);
+  border-color: rgba(194,65,12,.35);
+  color: var(--text);
+}
+
+.explorador-cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin: 8px 0 18px;
+}
+
+.explorador-cta .btn{
+  padding: 10px 14px;
+}
+
+.explorador-cta-note{
+  width:100%;
+  text-align:center;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* 3) Panel: solo uno visible */
+.tab-panel{ display:none; }
+.tab-panel.active{ display:block; }
+
+/* 4) Layout del contenido: 2 columnas equilibradas + apps abajo */
+.tab-panel-inner{
+  display:grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 16px;
+  align-items:start;
+}
+
+/* panel full abajo */
+.panel-full{
+  grid-column: 1 / -1;
+  margin-top: 6px;
+}
+
+/* 5) Categorías: grid más compacto y “relleno” */
+.panel-col--cats .categories-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* 6) Productos: de 1 columna a 2 columnas para no parecer lista eterna */
+.panel-col--prods .products-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Ajuste visual: títulos alineados y sin “flotar” */
+.panel-subtitle{
+  margin: 0 0 10px;
+  font-size: .85rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Cards: hover sutil y consistencia */
+.categories-grid a,
+.categories-grid .category-card,
+.products-grid .product-card{
+  border-radius: 14px;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+
+.categories-grid a:hover,
+.categories-grid a:focus-visible,
+.products-grid .product-card:hover,
+.products-grid .product-card:focus-within{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(15,23,42,.08);
+  border-color: rgba(194,65,12,.25);
+}
+
+/* 7) Aplicaciones: callouts en fila */
+.apps-bullets{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
+}
+
+.app-bullet{
+  background: rgba(194,65,12,.06);
+  border: 1px solid rgba(194,65,12,.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: .95rem;
+  color: var(--text);
+}
+
+/* 8) Responsive */
+@media (max-width: 980px){
+  .tab-panel-inner{ grid-template-columns: 1fr; }
+  .apps-bullets{ grid-template-columns: 1fr; }
+  .panel-col--prods .products-grid{ grid-template-columns: 1fr; }
+  .panel-col--cats .categories-grid{ grid-template-columns: 1fr; }
+}
