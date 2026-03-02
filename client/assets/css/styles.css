@@ -351,8 +351,8 @@ header {
 .category-tile .tile-arrow {
   font-size: 0.78rem;
   color: var(--primary);
-  opacity: 0;
-  transform: translateX(-4px);
+  opacity: 0.7;
+  transform: translateX(0);
   transition: var(--transition);
 }
 
@@ -416,22 +416,85 @@ header {
   margin-top: 0.35rem;
 }
 
+/* Step labels */
+.step-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  background: rgba(194,65,12,.08);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+/* Active category tile */
+.category-tile.is-active {
+  border-color: var(--primary);
+  background: rgba(194,65,12,.06);
+  box-shadow: 0 0 0 2px rgba(194,65,12,.15);
+}
+.category-tile.is-active .tile-icon { background: rgba(194,65,12,.14); }
+.category-tile.is-active .tile-arrow { opacity: 1; transform: translateX(0); color: var(--primary); }
+
+/* Tile arrow always visible */
+.category-tile .tile-arrow { opacity: 0.7; }
+.category-tile:hover .tile-arrow,
+.category-tile:focus-visible .tile-arrow,
+.category-tile.is-active .tile-arrow { opacity: 1; }
+
+/* Products header with clear filter */
+.panel-prods-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.panel-prods-header .panel-subtitle { margin-bottom: 0; flex: 1; }
+
+.btn-clear-filter {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(194,65,12,.08);
+  border: 1px solid rgba(194,65,12,.2);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-clear-filter:hover { background: rgba(194,65,12,.14); }
+
 /* Explorador CTA */
 .explorador-cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
   margin: 8px 0 18px;
 }
-.explorador-cta .btn { padding: 10px 14px; white-space: nowrap; }
+.explorador-cta .btn { padding: 10px 18px; white-space: nowrap; }
+
+.explorador-cta-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.explorador-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  transition: var(--transition);
+}
+.explorador-link:hover { text-decoration: underline; }
 .explorador-cta-note {
-  width: 100%;
-  text-align: center;
-  margin: 6px 0 0;
+  font-size: 0.78rem;
   color: var(--muted);
-  font-size: 0.92rem;
 }
 
 /* ══════════════════════════

@@ -84,7 +84,9 @@ function initReveal() {
   reveals.forEach(el => observer.observe(el));
 }
 
-// Tabs (Home) with keyboard navigation
+// Tabs (Home) with keyboard navigation + category reset
+const activeCategoryByCocina = {};
+
 function initTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
   if (!tabBtns.length) return;
@@ -108,6 +110,8 @@ function initTabs() {
     btn.focus();
     document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
     updateCtaCocina(btn);
+    const cocina = btn.dataset.cocina || 'latina';
+    clearCategoryFilter(cocina);
   }
 
   tabBtns.forEach((btn, i) => {
@@ -156,6 +160,85 @@ function initChips() {
   });
 }
 
+// Category filter helpers
+function renderProducts(cocina, categoriaId) {
+  const prodGrid = document.getElementById(`grid-prod-${cocina}`);
+  if (!prodGrid) return;
+  let prods = productos.filter(p => p.cocina === cocina);
+  if (categoriaId) {
+    prods = prods.filter(p => p.categoria === categoriaId);
+  } else {
+    prods = prods.slice(0, 6);
+  }
+
+  if (prods.length === 0) {
+    prodGrid.innerHTML = '<p class="text-muted" style="padding:1rem; text-align:center; grid-column:1/-1;">No hay productos en esta categoría.</p>';
+    return;
+  }
+
+  prodGrid.innerHTML = prods.map(p => `
+    <div class="card" data-testid="card-product-${p.id}">
+      <div class="card-img">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <div class="card-body">
+        <span class="badge">${p.formato}</span>
+        <h4 style="margin-bottom: 0.35rem;">${p.nombre}</h4>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom: 0.75rem;">
+          ${p.etiquetas.map(e => `<span style="font-size:0.75rem; background:var(--bg); padding:0.15rem 0.5rem; border-radius:4px; color:var(--muted);">${e}</span>`).join('')}
+        </div>
+        <a href="/contacto.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Solicitar ficha →</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateProdsTitle(cocina, catName) {
+  const title = document.getElementById(`prods-title-${cocina}`);
+  if (!title) return;
+  const header = title.closest('.panel-prods-header');
+
+  if (catName) {
+    title.textContent = `Productos en ${catName}`;
+    let clearBtn = header.querySelector('.btn-clear-filter');
+    if (!clearBtn) {
+      clearBtn = document.createElement('button');
+      clearBtn.className = 'btn-clear-filter';
+      clearBtn.textContent = 'Limpiar filtro ×';
+      clearBtn.dataset.testid = `btn-clear-${cocina}`;
+      clearBtn.addEventListener('click', () => clearCategoryFilter(cocina));
+      header.appendChild(clearBtn);
+    }
+  } else {
+    title.textContent = 'Productos Destacados';
+    const clearBtn = header.querySelector('.btn-clear-filter');
+    if (clearBtn) clearBtn.remove();
+  }
+}
+
+function selectCategory(cocina, catId) {
+  activeCategoryByCocina[cocina] = catId;
+  const catGrid = document.getElementById(`grid-cat-${cocina}`);
+  if (catGrid) {
+    catGrid.querySelectorAll('.category-tile').forEach(t => {
+      t.classList.toggle('is-active', t.dataset.catid === catId);
+    });
+  }
+  const cat = categorias.find(c => c.id === catId);
+  updateProdsTitle(cocina, cat ? cat.nombre : null);
+  renderProducts(cocina, catId);
+}
+
+function clearCategoryFilter(cocina) {
+  activeCategoryByCocina[cocina] = null;
+  const catGrid = document.getElementById(`grid-cat-${cocina}`);
+  if (catGrid) {
+    catGrid.querySelectorAll('.category-tile').forEach(t => t.classList.remove('is-active'));
+  }
+  updateProdsTitle(cocina, null);
+  renderProducts(cocina, null);
+}
+
 // HOME
 function initHome() {
   const cocinas = ['latina', 'arabe', 'asiatica'];
@@ -177,34 +260,27 @@ function initHome() {
     const catGrid = document.getElementById(`grid-cat-${cocina}`);
     if (catGrid) {
       catGrid.innerHTML = cats.map(c => `
-        <a href="/productos/index.html?cocina=${cocina}&categoria=${c.id}" class="category-tile" data-testid="tile-${c.id}">
+        <button type="button" class="category-tile" data-catid="${c.id}" data-cocina="${cocina}" data-testid="tile-${c.id}">
           <span class="tile-icon">${catIcons[c.id] || ''}</span>
           <span class="tile-name">${c.nombre}</span>
           <span class="tile-micro">${c.micro || ''}</span>
           <span class="tile-arrow">Ver productos →</span>
-        </a>
+        </button>
       `).join('');
+
+      catGrid.querySelectorAll('.category-tile').forEach(tile => {
+        tile.addEventListener('click', () => {
+          const catId = tile.dataset.catid;
+          if (activeCategoryByCocina[cocina] === catId) {
+            clearCategoryFilter(cocina);
+          } else {
+            selectCategory(cocina, catId);
+          }
+        });
+      });
     }
 
-    const prods = productos.filter(p => p.cocina === cocina).slice(0, 6);
-    const prodGrid = document.getElementById(`grid-prod-${cocina}`);
-    if (prodGrid) {
-      prodGrid.innerHTML = prods.map(p => `
-        <div class="card" data-testid="card-product-${p.id}">
-          <div class="card-img">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          </div>
-          <div class="card-body">
-            <span class="badge">${p.formato}</span>
-            <h4 style="margin-bottom: 0.35rem;">${p.nombre}</h4>
-            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom: 0.75rem;">
-              ${p.etiquetas.map(e => `<span style="font-size:0.75rem; background:var(--bg); padding:0.15rem 0.5rem; border-radius:4px; color:var(--muted);">${e}</span>`).join('')}
-            </div>
-            <a href="/contacto.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Solicitar ficha →</a>
-          </div>
-        </div>
-      `).join('');
-    }
+    renderProducts(cocina, null);
   });
 
   const carousel = document.getElementById('home-recetas-carousel');

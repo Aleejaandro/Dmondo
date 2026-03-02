@@ -107,6 +107,7 @@
 
         <div class="explorador-shell reveal">
           <div class="explorador-tabs">
+            <span class="step-label" data-testid="step-label-1">Paso 1 · Elige cocina</span>
             <div class="tab-list" role="tablist" aria-label="Seleccionar cocina">
               <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-latina" id="tab-latina" data-cocina="latina" data-testid="tab-latina">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -124,18 +125,22 @@
 
             <div class="explorador-cta" data-testid="explorador-cta">
               <a id="cta-cocina" class="btn btn-primary" href="/contacto.html#catalogo" data-testid="button-cta-cocina">Solicitar catálogo de Cocina Latina</a>
-              <a class="btn btn-outline" href="/productos/" data-testid="button-abrir-filtros">Abrir catálogo con filtros</a>
-              <p class="explorador-cta-note">Fichas técnicas bajo solicitud · Respuesta en 24–48h</p>
+              <span class="explorador-cta-meta">
+                <a href="/productos/" class="explorador-link" data-testid="link-abrir-filtros">Abrir catálogo con filtros →</a>
+                <span class="explorador-cta-note">Fichas técnicas bajo solicitud · Respuesta en 24–48h</span>
+              </span>
             </div>
 
             <div id="panel-latina" role="tabpanel" aria-labelledby="tab-latina" class="tab-panel active">
               <div class="tab-panel-inner">
                 <div class="panel-col panel-col--cats">
-                  <h3 class="panel-subtitle">Categorías</h3>
+                  <span class="step-label" data-testid="step-label-2-latina">Paso 2 · Elige categoría</span>
                   <div id="grid-cat-latina" class="categories-grid"></div>
                 </div>
                 <div class="panel-col panel-col--prods">
-                  <h3 class="panel-subtitle">Productos Destacados</h3>
+                  <div class="panel-prods-header">
+                    <h3 class="panel-subtitle" id="prods-title-latina">Productos Destacados</h3>
+                  </div>
                   <div id="grid-prod-latina" class="products-grid"></div>
                 </div>
                 <div class="panel-full">
@@ -152,11 +157,13 @@
             <div id="panel-arabe" role="tabpanel" aria-labelledby="tab-arabe" class="tab-panel">
               <div class="tab-panel-inner">
                 <div class="panel-col panel-col--cats">
-                  <h3 class="panel-subtitle">Categorías</h3>
+                  <span class="step-label" data-testid="step-label-2-arabe">Paso 2 · Elige categoría</span>
                   <div id="grid-cat-arabe" class="categories-grid"></div>
                 </div>
                 <div class="panel-col panel-col--prods">
-                  <h3 class="panel-subtitle">Productos Destacados</h3>
+                  <div class="panel-prods-header">
+                    <h3 class="panel-subtitle" id="prods-title-arabe">Productos Destacados</h3>
+                  </div>
                   <div id="grid-prod-arabe" class="products-grid"></div>
                 </div>
                 <div class="panel-full">
@@ -173,11 +180,13 @@
             <div id="panel-asiatica" role="tabpanel" aria-labelledby="tab-asiatica" class="tab-panel">
               <div class="tab-panel-inner">
                 <div class="panel-col panel-col--cats">
-                  <h3 class="panel-subtitle">Categorías</h3>
+                  <span class="step-label" data-testid="step-label-2-asiatica">Paso 2 · Elige categoría</span>
                   <div id="grid-cat-asiatica" class="categories-grid"></div>
                 </div>
                 <div class="panel-col panel-col--prods">
-                  <h3 class="panel-subtitle">Productos Destacados</h3>
+                  <div class="panel-prods-header">
+                    <h3 class="panel-subtitle" id="prods-title-asiatica">Productos Destacados</h3>
+                  </div>
                   <div id="grid-prod-asiatica" class="products-grid"></div>
                 </div>
                 <div class="panel-full">
