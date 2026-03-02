@@ -1,0 +1,67 @@
+Quiero que modifiques SOLO la sección:
+<section class="section-explorador" ...> ... </section>
+y los estilos relacionados en /assets/css/styles.css, y JS mínimo en /assets/js/app.js SOLO si hace falta para el CTA contextual.
+
+REGLAS IMPORTANTES (NO ROMPER)
+- Mantener exactamente estos IDs porque app.js los usa:
+  grid-cat-latina, grid-cat-arabe, grid-cat-asiatica
+  grid-prod-latina, grid-prod-arabe, grid-prod-asiatica
+  apps-latina, apps-arabe, apps-asiatica
+  panel-latina, panel-arabe, panel-asiatica
+  tab-latina, tab-arabe, tab-asiatica
+- Mantener estructura de tabs (role tablist/tab/tabpanel).
+- No tocar otras secciones fuera de section-explorador.
+- No reescribir todo styles.css: SOLO añade/ajusta estilos necesarios para el explorador (puedes añadirlos al final).
+- Paleta Spice Market Premium (ya aplicada en el sitio):
+  bg #FFF6ED, surface #FFFFFF, text #1F2937, muted #475569, border #E7E5E4,
+  primary #C2410C, hover #9A3412, accent #D4A017, ink #0F172A.
+
+OBJETIVO BLOQUE 2
+Que el explorador se sienta más “panel premium” integrado (menos elementos flotando separados) y mejore conversión con CTA contextual.
+
+CAMBIOS OBLIGATORIOS EN EL HTML (SOLO DENTRO DE section-explorador)
+1) Crear un “panel contenedor” del explorador para cohesión visual:
+   - envuelve el bloque de tabs + panels dentro de un div nuevo:
+     <div class="explorador-shell"> ... </div>
+   - añade un fondo suave, borde y sombra ligera a este shell (CSS).
+
+2) Añadir CTA contextual dentro del explorador (debajo de tabs y antes de los panels):
+   - Añade un bloque:
+     <div class="explorador-cta">
+       <a id="cta-cocina" class="btn btn-primary" href="/contacto.html#catalogo">Solicitar catálogo de Cocina Latina</a>
+       <a class="btn btn-outline" href="/productos/">Abrir catálogo con filtros</a>
+       <p class="explorador-cta-note">Fichas técnicas bajo solicitud · Respuesta en 24–48h</p>
+     </div>
+   - El texto del botón con id="cta-cocina" debe cambiar según tab activo (latina/arabe/asiatica).
+   - Opcional: añade querystring al href (ej: /contacto.html#catalogo?cocina=latina) si quieres, pero no es obligatorio.
+
+3) Mejorar la disposición interna del panel:
+   - En cada tab-panel, convierte .tab-panel-inner en un grid que alinee “Categorías” y “Productos Destacados” en desktop (por ejemplo 2 columnas), y “Aplicaciones” abajo a ancho completo.
+   - En mobile, todo una columna.
+
+4) “Aplicaciones”:
+   - Mantén el contenido actual, pero cambia la presentación de .apps-bullets para que parezca un set de “callouts” (chips/cajas) más visuales, no una lista aburrida.
+   - Mantén los div .app-bullet (no cambies el texto).
+
+CAMBIOS OBLIGATORIOS EN CSS (SOLO PARA EXPLORADOR)
+- Añade estilos con prefijo claro para no afectar otras secciones.
+- Debe verse más compacto y premium:
+  - .explorador-shell con background suave (tint), border y shadow
+  - Reducir separación excesiva entre tabs / categorías / productos / aplicaciones
+  - Definir tamaños consistentes para tiles y cards
+- Tabs:
+  - los .tab-btn deben tener estado activo claramente (relleno o borde + color)
+- Panels:
+  - Asegurar que solo se ve el panel activo:
+    .tab-panel { display:none; } .tab-panel.active { display:block; }
+- Tiles y productos:
+  - hover: elevar 2px + sombra suave
+  - “Ver productos →” debe aparecer en hover/focus de cada tile (si app.js renderiza tiles como links, aplica ahí)
+- Ajustar ancho:
+  - La sección debe ocupar más ancho útil sin que parezca estrecha: usa max-width 1200–1280px SOLO para el explorador (no cambies .container global).
+
+CAMBIOS MÍNIMOS EN JS (SOLO SI HACE FALTA)
+- Cuando cambie el tab activo, además de mostrar el panel, actualiza:
+  - texto del botón #cta-cocina (“Solicitar catálogo de Cocina X”)
+  - y opcionalmente añade una data-atribute o querystring a su href.
+- NO cambies la lógica del catálogo ni recetas.

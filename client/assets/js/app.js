@@ -89,6 +89,17 @@ function initTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
   if (!tabBtns.length) return;
 
+  const cocinaLabels = { latina: 'Cocina Latina', arabe: 'Cocina Árabe', asiatica: 'Cocina Asiática' };
+
+  function updateCtaCocina(btn) {
+    const ctaBtn = document.getElementById('cta-cocina');
+    if (!ctaBtn) return;
+    const cocina = btn.dataset.cocina || 'latina';
+    const label = cocinaLabels[cocina] || 'Cocina Latina';
+    ctaBtn.textContent = `Solicitar catálogo de ${label}`;
+    ctaBtn.href = `/contacto.html#catalogo?cocina=${cocina}`;
+  }
+
   function activateTab(btn) {
     tabBtns.forEach(b => { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); });
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -96,6 +107,7 @@ function initTabs() {
     btn.setAttribute('tabindex', '0');
     btn.focus();
     document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+    updateCtaCocina(btn);
   }
 
   tabBtns.forEach((btn, i) => {
