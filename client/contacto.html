@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto B2B | DMONDO</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="/" class="logo">DMONDO</a>
+      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav-links">
+        <a href="/cocinas/">Cocinas</a>
+        <a href="/productos/">Catálogo B2B</a>
+        <a href="/recetas/">Inspiración</a>
+        <a href="/calidad.html">Calidad</a>
+        <a href="/contacto.html" class="text-primary font-semibold">Hablar con ventas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container" style="padding-top: 4rem;">
+      <div class="split-layout">
+        <div>
+          <h1 style="font-size: 2.5rem;">Hablemos de tu abastecimiento</h1>
+          <p class="text-muted" style="font-size: 1.1rem; margin-bottom: 2rem;">Ya sea que busques graneles industriales, private label para supermercados o suministro regular para tu cadena de restaurantes, estamos listos para atenderte.</p>
+          
+          <div style="margin-bottom: 2rem;">
+            <h4 style="margin-bottom: 0.5rem;">Sede Central / Grupo ABM</h4>
+            <p class="text-muted">Polígono Industrial [Placeholder]<br>Madrid, España</p>
+          </div>
+          
+          <div>
+            <h4 style="margin-bottom: 0.5rem;">Contacto Directo B2B</h4>
+            <p class="text-muted">Email: b2b@dmondo.com<br>Tel: +34 900 000 000</p>
+          </div>
+        </div>
+
+        <div id="catalogo" style="background: var(--surface); padding: 2.5rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
+          <h3 style="margin-bottom: 1.5rem;">Solicita Información o Catálogo</h3>
+          
+          <!-- Form con validación front básica -->
+          <form onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';">
+            <div class="form-group">
+              <label class="form-label">Nombre y Apellidos</label>
+              <input type="text" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Empresa</label>
+              <input type="text" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Email corporativo</label>
+              <input type="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Tipo de negocio</label>
+              <select class="form-control" required>
+                <option value="">Selecciona...</option>
+                <option value="retail">Retail / Supermercado</option>
+                <option value="distribucion">Distribución / Mayorista</option>
+                <option value="industria">Industria Alimentaria</option>
+                <option value="horeca">Food Service / Restauración</option>
+                <option value="importacion">Importación</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Interés principal</label>
+              <select class="form-control" required>
+                <option value="">Selecciona...</option>
+                <option value="catalogo">Solicitar Catálogo Completo</option>
+                <option value="marca_blanca">Desarrollo de Marca Blanca</option>
+                <option value="granel">Materia Prima a Granel</option>
+                <option value="fichas">Fichas Técnicas</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Comentarios / Necesidades específicas</label>
+              <textarea class="form-control" rows="4"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%">Enviar solicitud</button>
+            <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem; text-align: center;">Al enviar, aceptas nuestra política de privacidad.</p>
+          </form>
+          
+          <div id="form-success" style="display: none; text-align: center; padding: 2rem 0;">
+            <svg width="48" height="48" stroke="var(--success)" fill="none" viewBox="0 0 24 24" style="margin: 0 auto 1rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <h3 style="color: var(--success); margin-bottom: 1rem;">¡Solicitud enviada!</h3>
+            <p class="text-muted">Gracias por contactar con DMONDO. Nuestro equipo comercial revisará tu solicitud y te contactaremos en las próximas 24–48 horas hábiles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="margin-top: 4rem;">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>DMONDO es el portfolio étnico del grupo ABM Crops.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>

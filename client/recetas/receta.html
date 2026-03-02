@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Aplicación | DMONDO</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="/" class="logo">DMONDO</a>
+      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav-links">
+        <a href="/cocinas/">Cocinas</a>
+        <a href="/productos/">Catálogo B2B</a>
+        <a href="/recetas/" class="text-primary">Inspiración</a>
+        <a href="/calidad.html">Calidad</a>
+        <a href="/contacto.html" class="text-primary font-semibold">Hablar con ventas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="recipe-detail">
+    <section class="hero" style="height: 40vh; min-height: 300px; background: var(--surface);">
+      <div class="container hero-content">
+        <a href="/recetas/" class="text-muted" style="display: inline-block; margin-bottom: 1rem;">← Volver a Inspiración</a>
+        <br>
+        <span class="badge" id="receta-cocina" style="text-transform: capitalize;"></span>
+        <h1 id="receta-titulo" style="margin-top: 1rem;">Cargando...</h1>
+      </div>
+    </section>
+
+    <section class="container" style="max-width: 800px; padding-top: 0;">
+      <div style="background: var(--surface); padding: 3rem; border-radius: var(--radius); border: 1px solid var(--border); margin-top: -3rem; position: relative; z-index: 10;">
+        <h2>Contexto Industrial</h2>
+        <p class="text-muted" style="margin-bottom: 2rem;">Esta aplicación demuestra el uso de nuestros ingredientes en un entorno de producción a escala o Food Service, garantizando estabilidad en la receta y optimización de costes.</p>
+        
+        <h3>Ingredientes DMONDO recomendados:</h3>
+        <ul class="capabilities-list" style="margin-bottom: 3rem;">
+          <li><span>✓</span> <span class="text-muted">Ingrediente base (Formatos 25kg)</span></li>
+          <li><span>✓</span> <span class="text-muted">Condimentos y especias (Formatos 1kg/5kg)</span></li>
+          <li><span>✓</span> <span class="text-muted">Salsas o conservas (Cubos Food Service)</span></li>
+        </ul>
+
+        <div style="background: var(--bg); padding: 2rem; border-radius: var(--radius); text-align: center;">
+          <h3 style="margin-bottom: 1rem;">¿Te interesa desarrollar este producto?</h3>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">Nuestro equipo técnico te asesora en la selección de ingredientes y formulación.</p>
+          <a href="/contacto.html" class="btn btn-primary">Contactar con I+D / Ventas</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>DMONDO es el portfolio étnico del grupo ABM Crops.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>

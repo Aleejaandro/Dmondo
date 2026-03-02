@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspiración y Aplicaciones Industriales | DMONDO</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="/" class="logo">DMONDO</a>
+      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav-links">
+        <a href="/cocinas/">Cocinas</a>
+        <a href="/productos/">Catálogo B2B</a>
+        <a href="/recetas/" class="text-primary">Inspiración</a>
+        <a href="/calidad.html">Calidad</a>
+        <a href="/contacto.html" class="text-primary font-semibold">Hablar con ventas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container" style="padding-top: 3rem;">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+        <h1 style="margin-bottom: 1rem;">Inspiración & Desarrollo</h1>
+        <p class="text-muted" style="font-size: 1.1rem;">Ideas de aplicación, tendencias de mercado y usos industriales de nuestro portfolio de ingredientes.</p>
+      </div>
+      
+      <div style="display: flex; justify-content: center; margin-bottom: 3rem;">
+        <div class="form-group" style="min-width: 250px;">
+          <label class="form-label text-center">Filtrar por origen</label>
+          <select id="filter-receta-cocina" class="form-control">
+            <option value="todas">Ver todas las aplicaciones</option>
+            <option value="latina">Aplicaciones Latinas</option>
+            <option value="arabe">Aplicaciones Árabes</option>
+            <option value="asiatica">Aplicaciones Asiáticas</option>
+          </select>
+        </div>
+      </div>
+      
+      <div id="recipes-grid" class="grid-3">
+        <!-- Render via JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>DMONDO es el portfolio étnico del grupo ABM Crops.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>
