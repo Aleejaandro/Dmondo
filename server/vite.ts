@@ -1,14 +1,14 @@
 import { type Express } from "express";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
-import viteConfig from "../vite.config";
 import fs from "fs";
 import path from "path";
-import { nanoid } from "nanoid";
 
 const viteLogger = createLogger();
 
 export async function setupVite(server: Server, app: Express) {
+  const viteConfig = (await import("../vite.config.js")).default;
+
   const serverOptions = {
     middlewareMode: true,
     hmr: { server, path: "/vite-hmr" },
@@ -35,19 +35,29 @@ export async function setupVite(server: Server, app: Express) {
     const url = req.originalUrl;
 
     try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html",
-      );
+      const clientDir = path.resolve(import.meta.dirname, "..", "client");
 
-      // always reload the index.html file from disk incase it changes
-      let template = await fs.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(
-        `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`,
-      );
+      let htmlFile: string;
+      const cleanUrl = url.split("?")[0].split("#")[0];
+
+      if (cleanUrl === "/" || cleanUrl === "/index.html") {
+        htmlFile = path.join(clientDir, "index.html");
+      } else if (cleanUrl.endsWith(".html")) {
+        htmlFile = path.join(clientDir, cleanUrl);
+      } else if (cleanUrl.endsWith("/")) {
+        htmlFile = path.join(clientDir, cleanUrl, "index.html");
+      } else {
+        htmlFile = path.join(clientDir, cleanUrl, "index.html");
+        if (!fs.existsSync(htmlFile)) {
+          htmlFile = path.join(clientDir, cleanUrl + ".html");
+        }
+      }
+
+      if (!fs.existsSync(htmlFile)) {
+        htmlFile = path.join(clientDir, "index.html");
+      }
+
+      let template = await fs.promises.readFile(htmlFile, "utf-8");
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {

@@ -44,26 +44,25 @@
         <div id="catalogo" style="background: var(--surface); padding: 2.5rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
           <h3 style="margin-bottom: 1.5rem;">Solicita Información o Catálogo</h3>
           
-          <!-- Form con validación front básica -->
-          <form onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';">
+          <form id="contact-form">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
-              <input type="text" class="form-control" required>
+              <input type="text" name="nombre" class="form-control" data-testid="input-nombre" required>
             </div>
             
             <div class="form-group">
               <label class="form-label">Empresa</label>
-              <input type="text" class="form-control" required>
+              <input type="text" name="empresa" class="form-control" data-testid="input-empresa" required>
             </div>
             
             <div class="form-group">
               <label class="form-label">Email corporativo</label>
-              <input type="email" class="form-control" required>
+              <input type="email" name="email" class="form-control" data-testid="input-email" required>
             </div>
             
             <div class="form-group">
               <label class="form-label">Tipo de negocio</label>
-              <select class="form-control" required>
+              <select name="tipoNegocio" class="form-control" data-testid="select-tipo-negocio" required>
                 <option value="">Selecciona...</option>
                 <option value="retail">Retail / Supermercado</option>
                 <option value="distribucion">Distribución / Mayorista</option>
@@ -75,7 +74,7 @@
             
             <div class="form-group">
               <label class="form-label">Interés principal</label>
-              <select class="form-control" required>
+              <select name="interes" class="form-control" data-testid="select-interes" required>
                 <option value="">Selecciona...</option>
                 <option value="catalogo">Solicitar Catálogo Completo</option>
                 <option value="marca_blanca">Desarrollo de Marca Blanca</option>
@@ -86,10 +85,12 @@
             
             <div class="form-group">
               <label class="form-label">Comentarios / Necesidades específicas</label>
-              <textarea class="form-control" rows="4"></textarea>
+              <textarea name="comentarios" class="form-control" rows="4" data-testid="textarea-comentarios"></textarea>
             </div>
             
-            <button type="submit" class="btn btn-primary" style="width: 100%">Enviar solicitud</button>
+            <div id="form-error" style="display: none; background: #FEE2E2; color: var(--danger); padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem; font-size: 0.9rem;"></div>
+            
+            <button type="submit" class="btn btn-primary" data-testid="button-submit-contact" style="width: 100%">Enviar solicitud</button>
             <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem; text-align: center;">Al enviar, aceptas nuestra política de privacidad.</p>
           </form>
           

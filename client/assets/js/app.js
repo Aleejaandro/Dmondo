@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('catalog-grid')) initCatalog();
   if (document.getElementById('recipes-grid')) initRecipes();
   if (document.getElementById('recipe-detail')) initRecipeDetail();
+  if (document.getElementById('contact-form')) initContactForm();
 });
 
 // Menú Móvil
@@ -278,4 +279,54 @@ function initRecipeDetail() {
       document.getElementById('receta-cocina').textContent = receta.cocina;
     }
   }
+}
+
+// FORMULARIO DE CONTACTO
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const errorDiv = document.getElementById('form-error');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    errorDiv.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    
+    const formData = new FormData(form);
+    const data = {
+      nombre: formData.get('nombre'),
+      empresa: formData.get('empresa'),
+      email: formData.get('email'),
+      tipoNegocio: formData.get('tipoNegocio'),
+      interes: formData.get('interes'),
+      comentarios: formData.get('comentarios') || null,
+    };
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        errorDiv.textContent = result.message || 'Ha ocurrido un error. Por favor, inténtalo de nuevo.';
+        errorDiv.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar solicitud';
+      }
+    } catch (err) {
+      errorDiv.textContent = 'Error de conexión. Por favor, inténtalo de nuevo.';
+      errorDiv.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar solicitud';
+    }
+  });
 }
