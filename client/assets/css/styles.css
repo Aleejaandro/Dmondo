@@ -98,7 +98,8 @@ header {
   position: relative;
 }
 .nav-links a:hover,
-.nav-links a:focus-visible { color: var(--primary); }
+.nav-links a:focus-visible,
+.nav-links a.nav-active { color: var(--primary); }
 
 .nav-cta {
   background-color: var(--primary) !important;
@@ -235,6 +236,31 @@ header {
 /* ══════════════════════════
    EXPLORADOR — COMMAND CENTER
    ══════════════════════════ */
+/* Cocinas page hero */
+.cocinas-hero {
+  padding: 4rem 0 2.5rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.cocinas-hero h1 {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 2.4rem;
+}
+.cocinas-hero-desc {
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.section-explorador--page {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+.section-explorador--page .explorador-shell {
+  margin-top: 0;
+}
+
 .section-explorador {
   padding: 5rem 0 6rem;
   background-color: var(--surface);

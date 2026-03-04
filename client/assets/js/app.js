@@ -94,12 +94,12 @@ function initTabs() {
   const tabBtns = document.querySelectorAll('.cc-cocina-btn');
   if (!tabBtns.length) return;
 
-  function activateTab(btn) {
+  function activateTab(btn, focus) {
     tabBtns.forEach(b => { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); });
     document.querySelectorAll('.cc-panel').forEach(p => p.classList.remove('active'));
     btn.setAttribute('aria-selected', 'true');
     btn.setAttribute('tabindex', '0');
-    btn.focus();
+    if (focus) btn.focus();
     const panel = document.getElementById(btn.getAttribute('aria-controls'));
     if (panel) panel.classList.add('active');
     cocinaActiva = btn.dataset.cocina || 'latina';
@@ -109,16 +109,22 @@ function initTabs() {
 
   tabBtns.forEach((btn, i) => {
     btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
-    btn.addEventListener('click', () => activateTab(btn));
+    btn.addEventListener('click', () => activateTab(btn, true));
     btn.addEventListener('keydown', (e) => {
       const tabs = Array.from(tabBtns);
       let idx = tabs.indexOf(btn);
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); activateTab(tabs[(idx + 1) % tabs.length]); }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); activateTab(tabs[(idx - 1 + tabs.length) % tabs.length]); }
-      if (e.key === 'Home') { e.preventDefault(); activateTab(tabs[0]); }
-      if (e.key === 'End') { e.preventDefault(); activateTab(tabs[tabs.length - 1]); }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); activateTab(tabs[(idx + 1) % tabs.length], true); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); activateTab(tabs[(idx - 1 + tabs.length) % tabs.length], true); }
+      if (e.key === 'Home') { e.preventDefault(); activateTab(tabs[0], true); }
+      if (e.key === 'End') { e.preventDefault(); activateTab(tabs[tabs.length - 1], true); }
     });
   });
+
+  const urlCocina = new URLSearchParams(window.location.search).get('cocina');
+  if (urlCocina) {
+    const match = Array.from(tabBtns).find(b => b.dataset.cocina === urlCocina);
+    if (match) activateTab(match, false);
+  }
 }
 
 function initSearch() {

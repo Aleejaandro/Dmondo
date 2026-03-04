@@ -13,16 +13,25 @@ Multi-page B2B brochure/catalog website for DMONDO (D'Mondo Food), the ethnic fo
 ## Pages
 | Route | File | Purpose |
 |-------|------|---------|
-| `/` | `client/index.html` | Home with hero, cuisine explorer tabs, B2B capabilities |
-| `/cocinas/` | `client/cocinas/index.html` | Cuisines landing (3 cards) |
-| `/cocinas/latina.html` | `client/cocinas/latina.html` | Latin cuisine detail |
-| `/cocinas/arabe.html` | `client/cocinas/arabe.html` | Arab cuisine detail |
-| `/cocinas/asiatica.html` | `client/cocinas/asiatica.html` | Asian cuisine detail |
+| `/` | `client/index.html` | Home with hero, Command Center explorer, B2B capabilities |
+| `/cocinas/` | `client/cocinas/index.html` | Single-page cuisine explorer (Command Center) with `?cocina=X` pre-selection |
+| `/cocinas/latina.html` | Redirect → `/cocinas/?cocina=latina` | |
+| `/cocinas/arabe.html` | Redirect → `/cocinas/?cocina=arabe` | |
+| `/cocinas/asiatica.html` | Redirect → `/cocinas/?cocina=asiatica` | |
 | `/productos/` | `client/productos/index.html` | Product catalog with filters |
 | `/recetas/` | `client/recetas/index.html` | Recipes/inspiration listing |
 | `/recetas/receta.html?id=X` | `client/recetas/receta.html` | Recipe detail |
 | `/calidad.html` | `client/calidad.html` | Quality & certifications |
 | `/contacto.html` | `client/contacto.html` | B2B contact form |
+
+## Explorador "Command Center"
+The cuisine explorer (used on home page and `/cocinas/`) is a 3-panel module:
+- **Topbar**: Search input + "Solicitar catálogo" CTA + "Abrir catálogo completo" link
+- **Col 1**: Vertical cuisine selector (Latina / Árabe / Asiática)
+- **Col 2**: Category list (compact, filterable by search)
+- **Col 3**: Product preview grid (2-col, filterable by category + search)
+- **Bottom**: Application callouts per cuisine
+- URL parameter `?cocina=X` pre-selects the cuisine on load
 
 ## API Endpoints
 - `POST /api/contact` — Submit contact form (persisted to PostgreSQL)
