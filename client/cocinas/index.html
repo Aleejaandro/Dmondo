@@ -51,89 +51,17 @@
           </div>
 
           <div class="cc-body">
-            <div class="cc-col-cocinas" role="tablist" aria-label="Seleccionar cocina">
-              <button class="cc-cocina-btn" role="tab" aria-selected="true" aria-controls="panel-latina" id="tab-latina" data-cocina="latina" data-testid="tab-latina">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                <span>Latina</span>
-              </button>
-              <button class="cc-cocina-btn" role="tab" aria-selected="false" aria-controls="panel-arabe" id="tab-arabe" data-cocina="arabe" data-testid="tab-arabe">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>Árabe</span>
-              </button>
-              <button class="cc-cocina-btn" role="tab" aria-selected="false" aria-controls="panel-asiatica" id="tab-asiatica" data-cocina="asiatica" data-testid="tab-asiatica">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"/><path d="M18 9a6 6 0 0 0-12 0c0 5 6 9 6 9s6-4 6-9z"/></svg>
-                <span>Asiática</span>
-              </button>
-            </div>
+            <nav class="cc-sidebar" id="cc-nav" aria-label="Explorador de cocinas" data-testid="cc-sidebar"></nav>
 
-            <div class="cc-panels">
-              <div id="panel-latina" role="tabpanel" aria-labelledby="tab-latina" class="cc-panel active">
-                <div class="cc-panel-grid">
-                  <div class="cc-col-cats">
-                    <h3 class="cc-col-title">Categorías</h3>
-                    <div id="grid-cat-latina" class="cc-cat-list"></div>
-                  </div>
-                  <div class="cc-col-prods">
-                    <div class="panel-prods-header">
-                      <h3 class="cc-col-title" id="prods-title-latina">Productos Destacados</h3>
-                    </div>
-                    <div id="grid-prod-latina" class="products-grid"></div>
-                  </div>
-                </div>
-                <div class="cc-apps">
-                  <h3 class="cc-col-title">Aplicaciones</h3>
-                  <div id="apps-latina" class="apps-bullets">
-                    <div class="app-bullet"><span class="app-dot"></span> Desarrollo de tortillas y arepas a escala industrial</div>
-                    <div class="app-bullet"><span class="app-dot"></span> Platos preparados para líneas de Food Service</div>
-                    <div class="app-bullet"><span class="app-dot"></span> Envasado de marca blanca para cadenas de supermercados</div>
-                  </div>
-                </div>
+            <div class="cc-main">
+              <div class="panel-prods-header">
+                <h3 class="cc-col-title" id="cc-prods-title" data-testid="text-prods-title">Productos Destacados</h3>
               </div>
+              <div id="cc-products-grid" class="products-grid" data-testid="cc-products-grid"></div>
 
-              <div id="panel-arabe" role="tabpanel" aria-labelledby="tab-arabe" class="cc-panel">
-                <div class="cc-panel-grid">
-                  <div class="cc-col-cats">
-                    <h3 class="cc-col-title">Categorías</h3>
-                    <div id="grid-cat-arabe" class="cc-cat-list"></div>
-                  </div>
-                  <div class="cc-col-prods">
-                    <div class="panel-prods-header">
-                      <h3 class="cc-col-title" id="prods-title-arabe">Productos Destacados</h3>
-                    </div>
-                    <div id="grid-prod-arabe" class="products-grid"></div>
-                  </div>
-                </div>
-                <div class="cc-apps">
-                  <h3 class="cc-col-title">Aplicaciones</h3>
-                  <div id="apps-arabe" class="apps-bullets">
-                    <div class="app-bullet"><span class="app-dot"></span> Desarrollo de hummus industrial y cremas untables</div>
-                    <div class="app-bullet"><span class="app-dot"></span> Mezclas de especias personalizadas (Ras el Hanout, Za'atar)</div>
-                    <div class="app-bullet"><span class="app-dot"></span> Formatos granel (sacos 25kg) para envasadores</div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="panel-asiatica" role="tabpanel" aria-labelledby="tab-asiatica" class="cc-panel">
-                <div class="cc-panel-grid">
-                  <div class="cc-col-cats">
-                    <h3 class="cc-col-title">Categorías</h3>
-                    <div id="grid-cat-asiatica" class="cc-cat-list"></div>
-                  </div>
-                  <div class="cc-col-prods">
-                    <div class="panel-prods-header">
-                      <h3 class="cc-col-title" id="prods-title-asiatica">Productos Destacados</h3>
-                    </div>
-                    <div id="grid-prod-asiatica" class="products-grid"></div>
-                  </div>
-                </div>
-                <div class="cc-apps">
-                  <h3 class="cc-col-title">Aplicaciones</h3>
-                  <div id="apps-asiatica" class="apps-bullets">
-                    <div class="app-bullet"><span class="app-dot"></span> Arroz Jazmín y Glutinoso en sacos industriales 20kg</div>
-                    <div class="app-bullet"><span class="app-dot"></span> Salsas en bidones 10L / 25L para cocinas centrales</div>
-                    <div class="app-bullet"><span class="app-dot"></span> Kits Meal Prep y wok preparados para retail</div>
-                  </div>
-                </div>
+              <div class="cc-apps">
+                <h3 class="cc-col-title">Aplicaciones</h3>
+                <div id="cc-apps-content" class="apps-bullets" data-testid="cc-apps-content"></div>
               </div>
             </div>
           </div>

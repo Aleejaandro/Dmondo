@@ -25,13 +25,14 @@ Multi-page B2B brochure/catalog website for DMONDO (D'Mondo Food), the ethnic fo
 | `/contacto.html` | `client/contacto.html` | B2B contact form |
 
 ## Explorador "Command Center"
-The cuisine explorer (used on home page and `/cocinas/`) is a 3-panel module:
+The cuisine explorer (used on home page and `/cocinas/`) uses an accordion sidebar layout:
 - **Topbar**: Search input + "Solicitar catálogo" CTA + "Abrir catálogo completo" link
-- **Col 1**: Vertical cuisine selector (Latina / Árabe / Asiática)
-- **Col 2**: Category list (compact, filterable by search)
-- **Col 3**: Product preview grid (2-col, filterable by category + search)
-- **Bottom**: Application callouts per cuisine
+- **Sidebar (210px)**: Accordion with 3 cuisine groups (Latina / Árabe / Asiática). Each group expands to show its categories inline. One group is always open.
+- **Main area**: Single product grid (3 columns on desktop) + applications row. Content updates dynamically when switching cuisines or categories.
+- Key IDs: `#cc-nav` (sidebar), `#cc-products-grid` (single product grid), `#cc-prods-title`, `#cc-apps-content`
+- `initHome()` triggered by presence of `#cc-nav` in DOM; builds sidebar dynamically from JS data
 - URL parameter `?cocina=X` pre-selects the cuisine on load
+- Applications data is stored in JS `aplicaciones` object and rendered dynamically per cuisine
 
 ## API Endpoints
 - `POST /api/contact` — Submit contact form (persisted to PostgreSQL)

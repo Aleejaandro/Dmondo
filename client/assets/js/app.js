@@ -45,12 +45,10 @@ const recetas = [
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initReveal();
-  initTabs();
   initSearch();
   initChips();
   
-  // Rutas especificas
-  if (document.getElementById('grid-cat-latina')) initHome();
+  if (document.getElementById('cc-nav')) initHome();
   if (document.getElementById('catalog-grid')) initCatalog();
   if (document.getElementById('recipes-grid')) initRecipes();
   if (document.getElementById('recipe-detail')) initRecipeDetail();
@@ -85,47 +83,35 @@ function initReveal() {
   reveals.forEach(el => observer.observe(el));
 }
 
-// Tabs (Home) with keyboard navigation + category reset
-const activeCategoryByCocina = {};
 let cocinaActiva = 'latina';
+let categoriaActiva = null;
 let queryTexto = '';
 
-function initTabs() {
-  const tabBtns = document.querySelectorAll('.cc-cocina-btn');
-  if (!tabBtns.length) return;
+const aplicaciones = {
+  latina: [
+    'Desarrollo de tortillas y arepas a escala industrial',
+    'Platos preparados para líneas de Food Service',
+    'Envasado de marca blanca para cadenas de supermercados'
+  ],
+  arabe: [
+    'Desarrollo de hummus industrial y cremas untables',
+    'Mezclas de especias personalizadas (Ras el Hanout, Za\'atar)',
+    'Formatos granel (sacos 25kg) para envasadores'
+  ],
+  asiatica: [
+    'Arroz Jazmín y Glutinoso en sacos industriales 20kg',
+    'Salsas en bidones 10L / 25L para cocinas centrales',
+    'Kits Meal Prep y wok preparados para retail'
+  ]
+};
 
-  function activateTab(btn, focus) {
-    tabBtns.forEach(b => { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); });
-    document.querySelectorAll('.cc-panel').forEach(p => p.classList.remove('active'));
-    btn.setAttribute('aria-selected', 'true');
-    btn.setAttribute('tabindex', '0');
-    if (focus) btn.focus();
-    const panel = document.getElementById(btn.getAttribute('aria-controls'));
-    if (panel) panel.classList.add('active');
-    cocinaActiva = btn.dataset.cocina || 'latina';
-    clearCategoryFilter(cocinaActiva);
-    applySearch();
-  }
+const cocinaIcons = {
+  latina: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  arabe: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  asiatica: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"/><path d="M18 9a6 6 0 0 0-12 0c0 5 6 9 6 9s6-4 6-9z"/></svg>'
+};
 
-  tabBtns.forEach((btn, i) => {
-    btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
-    btn.addEventListener('click', () => activateTab(btn, true));
-    btn.addEventListener('keydown', (e) => {
-      const tabs = Array.from(tabBtns);
-      let idx = tabs.indexOf(btn);
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); activateTab(tabs[(idx + 1) % tabs.length], true); }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); activateTab(tabs[(idx - 1 + tabs.length) % tabs.length], true); }
-      if (e.key === 'Home') { e.preventDefault(); activateTab(tabs[0], true); }
-      if (e.key === 'End') { e.preventDefault(); activateTab(tabs[tabs.length - 1], true); }
-    });
-  });
-
-  const urlCocina = new URLSearchParams(window.location.search).get('cocina');
-  if (urlCocina) {
-    const match = Array.from(tabBtns).find(b => b.dataset.cocina === urlCocina);
-    if (match) activateTab(match, false);
-  }
-}
+const cocinaLabels = { latina: 'Latina', arabe: 'Árabe', asiatica: 'Asiática' };
 
 function initSearch() {
   const input = document.getElementById('cc-search');
@@ -138,22 +124,20 @@ function initSearch() {
 
 function applySearch() {
   const q = queryTexto;
-  const cocina = cocinaActiva;
-  const catGrid = document.getElementById(`grid-cat-${cocina}`);
-  if (!catGrid) return;
+  const nav = document.getElementById('cc-nav');
+  if (!nav) return;
 
-  catGrid.querySelectorAll('.category-tile').forEach(tile => {
+  nav.querySelectorAll('.cc-nav-item').forEach(item => {
     if (!q) {
-      tile.classList.remove('cc-hidden');
+      item.classList.remove('cc-hidden');
       return;
     }
-    const name = (tile.querySelector('.tile-name')?.textContent || '').toLowerCase();
-    const micro = (tile.querySelector('.tile-micro')?.textContent || '').toLowerCase();
-    const match = name.includes(q) || micro.includes(q);
-    tile.classList.toggle('cc-hidden', !match);
+    const name = (item.dataset.name || '').toLowerCase();
+    const micro = (item.dataset.micro || '').toLowerCase();
+    item.classList.toggle('cc-hidden', !name.includes(q) && !micro.includes(q));
   });
 
-  renderProducts(cocina, activeCategoryByCocina[cocina] || null, q);
+  renderProducts(cocinaActiva, categoriaActiva, q);
 }
 
 // Chip filters for inspiration carousel
@@ -188,9 +172,8 @@ function initChips() {
   });
 }
 
-// Category filter helpers
 function renderProducts(cocina, categoriaId, searchQuery) {
-  const prodGrid = document.getElementById(`grid-prod-${cocina}`);
+  const prodGrid = document.getElementById('cc-products-grid');
   if (!prodGrid) return;
   let prods = productos.filter(p => p.cocina === cocina);
   if (categoriaId) {
@@ -230,22 +213,36 @@ function renderProducts(cocina, categoriaId, searchQuery) {
   `).join('');
 }
 
-function updateProdsTitle(cocina, catName) {
-  const title = document.getElementById(`prods-title-${cocina}`);
+function renderApps(cocina) {
+  const container = document.getElementById('cc-apps-content');
+  if (!container) return;
+  const apps = aplicaciones[cocina] || [];
+  container.innerHTML = apps.map(a =>
+    `<div class="app-bullet"><span class="app-dot"></span> ${a}</div>`
+  ).join('');
+}
+
+function updateProdsTitle(catName) {
+  const title = document.getElementById('cc-prods-title');
   if (!title) return;
   const header = title.closest('.panel-prods-header');
   if (!header) return;
 
   if (catName) {
-    title.textContent = `Productos en ${catName}`;
+    title.textContent = `Productos — ${catName}`;
     let clearBtn = header.querySelector('.btn-clear-filter');
     if (!clearBtn) {
       clearBtn = document.createElement('button');
       clearBtn.className = 'btn-clear-filter';
       clearBtn.type = 'button';
-      clearBtn.textContent = 'Limpiar filtro ×';
-      clearBtn.dataset.testid = `btn-clear-${cocina}`;
-      clearBtn.addEventListener('click', () => clearCategoryFilter(cocina));
+      clearBtn.textContent = 'Ver todos ×';
+      clearBtn.dataset.testid = 'btn-clear-filter';
+      clearBtn.addEventListener('click', () => {
+        categoriaActiva = null;
+        document.querySelectorAll('.cc-nav-item').forEach(i => i.classList.remove('is-active'));
+        updateProdsTitle(null);
+        renderProducts(cocinaActiva, null, queryTexto || null);
+      });
       header.appendChild(clearBtn);
     }
   } else {
@@ -255,74 +252,93 @@ function updateProdsTitle(cocina, catName) {
   }
 }
 
-function selectCategory(cocina, catId) {
-  activeCategoryByCocina[cocina] = catId;
-  const catGrid = document.getElementById(`grid-cat-${cocina}`);
-  if (catGrid) {
-    catGrid.querySelectorAll('.category-tile').forEach(t => {
-      t.classList.toggle('is-active', t.dataset.catid === catId);
-    });
-  }
-  const cat = categorias.find(c => c.id === catId);
-  updateProdsTitle(cocina, cat ? cat.nombre : null);
-  renderProducts(cocina, catId, queryTexto || null);
-}
+function openCocina(cocina, skipRender) {
+  cocinaActiva = cocina;
+  categoriaActiva = null;
 
-function clearCategoryFilter(cocina) {
-  activeCategoryByCocina[cocina] = null;
-  const catGrid = document.getElementById(`grid-cat-${cocina}`);
-  if (catGrid) {
-    catGrid.querySelectorAll('.category-tile').forEach(t => t.classList.remove('is-active'));
-  }
-  updateProdsTitle(cocina, null);
-  renderProducts(cocina, null, queryTexto || null);
-}
-
-// HOME
-function initHome() {
-  const cocinas = ['latina', 'arabe', 'asiatica'];
-
-  const catIcons = {
-    harinas: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>',
-    frijoles: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>',
-    'conservas-lat': '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
-    especias: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
-    legumbres: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>',
-    'conservas-ar': '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>',
-    arroces: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 3v18"/><path d="M18 9a6 6 0 0 0-12 0c0 5 6 9 6 9s6-4 6-9z"/></svg>',
-    salsas: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M8 2h8l4 10H4L8 2z"/><path d="M4 12v6a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-6"/></svg>',
-    fideos: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
-  };
-
-  cocinas.forEach(cocina => {
-    const cats = categorias.filter(c => c.cocina === cocina);
-    const catGrid = document.getElementById(`grid-cat-${cocina}`);
-    if (catGrid) {
-      catGrid.innerHTML = cats.map(c => `
-        <button type="button" class="category-tile" data-catid="${c.id}" data-cocina="${cocina}" data-testid="tile-${c.id}">
-          <span class="tile-icon">${catIcons[c.id] || ''}</span>
-          <span class="tile-info">
-            <span class="tile-name">${c.nombre}</span>
-            <span class="tile-micro">${c.micro || ''}</span>
-          </span>
-          <span class="tile-arrow">→</span>
-        </button>
-      `).join('');
-
-      catGrid.querySelectorAll('.category-tile').forEach(tile => {
-        tile.addEventListener('click', () => {
-          const catId = tile.dataset.catid;
-          if (activeCategoryByCocina[cocina] === catId) {
-            clearCategoryFilter(cocina);
-          } else {
-            selectCategory(cocina, catId);
-          }
-        });
-      });
-    }
-
-    renderProducts(cocina, null);
+  document.querySelectorAll('.cc-nav-group').forEach(g => {
+    const isTarget = g.dataset.cocina === cocina;
+    g.classList.toggle('is-open', isTarget);
+    const header = g.querySelector('.cc-nav-header');
+    if (header) header.setAttribute('aria-expanded', isTarget ? 'true' : 'false');
   });
+  document.querySelectorAll('.cc-nav-item').forEach(i => i.classList.remove('is-active'));
+
+  if (!skipRender) {
+    updateProdsTitle(null);
+    renderProducts(cocina, null, queryTexto || null);
+    renderApps(cocina);
+  }
+}
+
+function selectCategory(catId) {
+  categoriaActiva = catId;
+  document.querySelectorAll('.cc-nav-item').forEach(i => {
+    i.classList.toggle('is-active', i.dataset.catid === catId);
+  });
+  const cat = categorias.find(c => c.id === catId);
+  updateProdsTitle(cat ? cat.nombre : null);
+  renderProducts(cocinaActiva, catId, queryTexto || null);
+}
+
+function initHome() {
+  const nav = document.getElementById('cc-nav');
+  if (!nav) return;
+
+  const cocinas = ['latina', 'arabe', 'asiatica'];
+  const chevronSvg = '<svg class="cc-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+
+  nav.innerHTML = cocinas.map(cocina => {
+    const cats = categorias.filter(c => c.cocina === cocina);
+    const catCount = productos.filter(p => p.cocina === cocina).length;
+    const panelId = `cc-items-${cocina}`;
+    return `
+      <div class="cc-nav-group" data-cocina="${cocina}" data-testid="nav-group-${cocina}">
+        <button class="cc-nav-header" data-testid="nav-header-${cocina}" type="button" aria-expanded="false" aria-controls="${panelId}">
+          ${cocinaIcons[cocina]}
+          <span class="cc-nav-label">${cocinaLabels[cocina]}</span>
+          <span style="font-size:0.7rem; color:var(--muted); font-weight:400;">${catCount}</span>
+          ${chevronSvg}
+        </button>
+        <div class="cc-nav-items" id="${panelId}" role="region" aria-label="${cocinaLabels[cocina]}">
+          ${cats.map(c => `
+            <button class="cc-nav-item" data-catid="${c.id}" data-cocina="${cocina}" data-name="${c.nombre}" data-micro="${c.micro || ''}" data-testid="nav-item-${c.id}" type="button">
+              ${c.nombre}
+              <span class="cc-nav-micro">${(c.micro || '').split(',')[0]}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  nav.querySelectorAll('.cc-nav-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const cocina = header.closest('.cc-nav-group').dataset.cocina;
+      if (cocinaActiva === cocina) return;
+      openCocina(cocina);
+    });
+  });
+
+  nav.querySelectorAll('.cc-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const catId = item.dataset.catid;
+      const cocina = item.dataset.cocina;
+      if (cocinaActiva !== cocina) openCocina(cocina, true);
+      if (categoriaActiva === catId) {
+        categoriaActiva = null;
+        document.querySelectorAll('.cc-nav-item').forEach(i => i.classList.remove('is-active'));
+        updateProdsTitle(null);
+        renderProducts(cocina, null, queryTexto || null);
+      } else {
+        selectCategory(catId);
+      }
+    });
+  });
+
+  const urlCocina = new URLSearchParams(window.location.search).get('cocina');
+  const startCocina = (urlCocina && cocinas.includes(urlCocina)) ? urlCocina : 'latina';
+  openCocina(startCocina);
 
   const carousel = document.getElementById('home-recetas-carousel');
   if (carousel) {
