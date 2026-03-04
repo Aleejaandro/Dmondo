@@ -488,7 +488,16 @@ header {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(194,65,12,.2) transparent;
 }
+.cc-main .products-grid::-webkit-scrollbar { width: 5px; }
+.cc-main .products-grid::-webkit-scrollbar-track { background: transparent; }
+.cc-main .products-grid::-webkit-scrollbar-thumb { background: rgba(194,65,12,.2); border-radius: 4px; }
+.cc-main .products-grid::-webkit-scrollbar-thumb:hover { background: rgba(194,65,12,.35); }
 .products-grid .card {
   border-radius: 12px;
   transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
