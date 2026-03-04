@@ -301,7 +301,6 @@ function initHome() {
           ${cats.map(c => `
             <button class="cc-nav-item" data-catid="${c.id}" data-cocina="${cocina}" data-name="${c.nombre}" data-micro="${c.micro || ''}" data-testid="nav-item-${c.id}" type="button">
               ${c.nombre}
-              <span class="cc-nav-micro">${(c.micro || '').split(',')[0]}</span>
             </button>
           `).join('')}
         </div>
