@@ -24,6 +24,9 @@ Multi-page B2B brochure/catalog website for DMONDO (D'Mondo Food), the ethnic fo
 | `/calidad.html` | `client/calidad.html` | Quality & certifications |
 | `/contacto.html` | `client/contacto.html` | B2B contact form |
 
+## Home — Hero Inmersivo
+Full-screen background image (`hero-beige.png`) with dark gradient overlay on the left for text legibility. Staggered CSS entry animations (`hero-anim--1` to `--4`), slow zoom on background image (`heroZoom` keyframes). Two CTAs: "Solicitar catálogo" (primary) + "Explorar productos" (outline-light). Dark band below with 3 bullet points (B2B, Private label, GFSI).
+
 ## Home — Cocinas Showcase
 Three visual cards (Latina, Árabe, Asiática) with hero images, overlay text, and CTAs linking to `/productos/?cocina=X`. Purely visual "storefront" — no interactive filtering.
 
