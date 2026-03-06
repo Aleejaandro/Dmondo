@@ -4,18 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inspiración y Aplicaciones Industriales | DMONDO</title>
+  <meta name="description" content="Ideas de aplicación, tendencias de mercado y usos industriales de ingredientes étnicos DMONDO. Recetas y formulaciones para retail, HORECA e industria alimentaria.">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <header>
     <div class="container nav-container">
-      <a href="/" class="logo" style="display: flex; align-items: center;">
+      <a href="/" class="logo">
         <img src="/assets/img/logo.png" alt="D'Mondo Food" />
       </a>
       <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <nav class="nav-links">
         <a href="/productos/">Catálogo B2B</a>
-        <a href="/recetas/" class="text-primary">Inspiración</a>
+        <a href="/recetas/" class="nav-active">Inspiración</a>
         <a href="/calidad.html">Calidad</a>
         <a href="/contacto.html" class="nav-cta" data-testid="link-contacto">Hablar con ventas</a>
       </nav>
@@ -23,34 +24,101 @@
   </header>
 
   <main>
-    <section class="container" style="padding-top: 3rem;">
-      <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
-        <h1 style="margin-bottom: 1rem;">Inspiración & Desarrollo</h1>
-        <p class="text-muted" style="font-size: 1.1rem;">Ideas de aplicación, tendencias de mercado y usos industriales de nuestro portfolio de ingredientes.</p>
-      </div>
-      
-      <div style="display: flex; justify-content: center; margin-bottom: 3rem;">
-        <div class="form-group" style="min-width: 250px;">
-          <label class="form-label text-center">Filtrar por origen</label>
-          <select id="filter-receta-cocina" class="form-control">
-            <option value="todas">Ver todas las aplicaciones</option>
-            <option value="latina">Aplicaciones Latinas</option>
-            <option value="arabe">Aplicaciones Árabes</option>
-            <option value="asiatica">Aplicaciones Asiáticas</option>
-          </select>
+    <section class="inspo-hero" data-testid="section-inspo-hero">
+      <div class="container">
+        <div class="inspo-hero-inner reveal">
+          <span class="section-label">Tendencias & Desarrollo</span>
+          <h1>Inspiración & Aplicaciones</h1>
+          <p class="inspo-hero-desc">Ideas de producto y aplicaciones reales con ingredientes étnicos. Desarrollo basado en tendencias de mercado para retail, industria alimentaria y HORECA.</p>
         </div>
       </div>
-      
-      <div id="recipes-grid" class="grid-3">
-        <!-- Render via JS -->
+    </section>
+
+    <section class="section-recetas" data-testid="section-recetas">
+      <div class="container">
+        <div class="recetas-toolbar reveal" data-testid="recetas-toolbar">
+          <div class="recetas-chips" id="receta-chips-page">
+            <button class="chip active" data-cocina="todas" data-testid="chip-todas">Todas</button>
+            <button class="chip" data-cocina="latina" data-testid="chip-latina">Latina</button>
+            <button class="chip" data-cocina="arabe" data-testid="chip-arabe">Árabe</button>
+            <button class="chip" data-cocina="asiatica" data-testid="chip-asiatica">Asiática</button>
+          </div>
+          <select id="filter-receta-cocina" class="recetas-select" data-testid="select-filter-cocina">
+            <option value="todas">Todas las aplicaciones</option>
+            <option value="latina">Latina</option>
+            <option value="arabe">Árabe</option>
+            <option value="asiatica">Asiática</option>
+          </select>
+        </div>
+
+        <div id="recipes-grid" class="recetas-grid reveal" data-testid="recipes-grid"></div>
+      </div>
+    </section>
+
+    <section class="section-cta" data-testid="section-inspo-cta">
+      <div class="container reveal">
+        <div class="cta-box">
+          <h2>¿Necesitas una formulación a medida?</h2>
+          <p class="text-muted">Nuestro equipo de desarrollo te ayuda a crear aplicaciones con ingredientes étnicos adaptadas a tu línea de producto.</p>
+          <div class="cta-actions">
+            <a href="/contacto.html" class="btn btn-primary" data-testid="button-contacto-formulacion">Consultar aplicación</a>
+            <a href="/productos/" class="btn btn-outline" data-testid="button-ver-ingredientes">Ver ingredientes disponibles</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer data-testid="footer">
+    <div class="footer-accent"></div>
     <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <div class="footer-logo">
+            <img src="/assets/img/logo.png" alt="D'Mondo Food" />
+          </div>
+          <p class="footer-desc">Importación y distribución B2B de ingredientes étnicos premium para profesionales de la alimentación.</p>
+          <div class="footer-badges">
+            <span class="footer-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Grupo ABM Crops
+            </span>
+            <span class="footer-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              IFS · BRC
+            </span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="/productos/">Catálogo B2B</a></li>
+            <li><a href="/recetas/">Aplicaciones y Recetas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="/calidad.html">Calidad y Certificaciones</a></li>
+            <li><a href="/contacto.html">Contacto B2B</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col--contact">
+          <h4>Contacto directo</h4>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:info@dmondo.com">info@dmondo.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+34 900 000 000</span>
+          </div>
+          <a href="/contacto.html" class="footer-cta">Solicitar información</a>
+        </div>
+      </div>
       <div class="footer-bottom">
-        <p>DMONDO es el portfolio étnico del grupo ABM Crops.</p>
+        <span class="footer-bottom-brand">DMONDO — Portfolio étnico de ABM Crops</span>
+        <span class="footer-bottom-copy">&copy; 2026 DMONDO. Todos los derechos reservados.</span>
       </div>
     </div>
   </footer>

@@ -534,6 +534,117 @@ header {
   margin-top: 4rem;
 }
 
+/* INSPIRACIÓN PAGE */
+.inspo-hero {
+  background: var(--bg);
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+.inspo-hero-inner { max-width: 640px; margin: 0 auto; }
+.inspo-hero h1 { margin: 0 0 1rem; font-size: 2.4rem; }
+.inspo-hero-desc {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.section-recetas { padding: 3rem 0 5rem; background: var(--surface); }
+
+.recetas-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 2.5rem;
+}
+.recetas-chips {
+  display: flex;
+  gap: 8px;
+}
+.recetas-select { display: none; }
+
+.recetas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.receta-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(15,23,42,.08);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.receta-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(15,23,42,.14);
+}
+
+.receta-card-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.receta-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.receta-card:hover .receta-card-img img {
+  transform: scale(1.05);
+}
+
+.receta-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.receta-card-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.receta-card-badge--latina { background: var(--primary); }
+.receta-card-badge--arabe { background: var(--accent); }
+.receta-card-badge--asiatica { background: var(--ink); }
+
+.receta-card-body h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.receta-card-body p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 16px;
+  flex: 1;
+}
+
+.receta-card-cta {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.receta-card:hover .receta-card-cta {
+  text-decoration: underline;
+}
+
 /* FAQ */
 .faq-list { margin-top: 2rem; }
 .faq-item {
@@ -1394,6 +1505,7 @@ section {
   .cc-nav-group.is-open .cc-nav-items { max-height: 300px; opacity: 1; }
   .cc-main .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .apps-bullets { grid-template-columns: 1fr; }
+  .recetas-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1438,6 +1550,11 @@ section {
   .footer-bottom { flex-direction: column; text-align: center; }
 
   .inspiration-header { flex-direction: column; align-items: flex-start; }
+
+  .inspo-hero h1 { font-size: 1.8rem; }
+  .recetas-chips { display: none; }
+  .recetas-select { display: block; width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; background: #fff; }
+  .recetas-grid { grid-template-columns: 1fr; }
 
   .cta-box { padding: 3rem 1.5rem; }
 }

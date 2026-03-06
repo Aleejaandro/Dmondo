@@ -27,15 +27,15 @@ const productos = [
 ];
 
 const recetas = [
-  { id: 'r1', titulo: 'Arepas Industriales', cocina: 'latina', imagen: 'bg-primary' },
-  { id: 'r2', titulo: 'Hummus de Garbanzo', cocina: 'arabe', imagen: 'bg-accent' },
-  { id: 'r3', titulo: 'Pad Thai Auténtico', cocina: 'asiatica', imagen: 'bg-success' },
-  { id: 'r4', titulo: 'Feijoada Base', cocina: 'latina', imagen: 'bg-primaryHover' },
-  { id: 'r5', titulo: 'Falafel Tradicional', cocina: 'arabe', imagen: 'bg-accent' },
-  { id: 'r6', titulo: 'Arroz Frito Yangchow', cocina: 'asiatica', imagen: 'bg-success' },
-  { id: 'r7', titulo: 'Tacos Al Pastor', cocina: 'latina', imagen: 'bg-danger' },
-  { id: 'r8', titulo: 'Shawarma', cocina: 'arabe', imagen: 'bg-ink' },
-  { id: 'r9', titulo: 'Ramen Tonkotsu', cocina: 'asiatica', imagen: 'bg-muted' }
+  { id: 'r1', titulo: 'Arepas Industriales', cocina: 'latina', imagen: '/assets/img/recetas/r1-arepas.png', desc: 'Arepa de maíz precocida para líneas de food service y retail. Base versátil para rellenos diversos.' },
+  { id: 'r2', titulo: 'Hummus de Garbanzo', cocina: 'arabe', imagen: '/assets/img/recetas/r2-hummus.png', desc: 'Crema de garbanzo con tahini para untables industriales. Alta demanda en retail europeo.' },
+  { id: 'r3', titulo: 'Pad Thai Auténtico', cocina: 'asiatica', imagen: '/assets/img/recetas/r3-padthai.png', desc: 'Noodles de arroz salteados con salsa de tamarindo. Formato wok para HORECA y platos preparados.' },
+  { id: 'r4', titulo: 'Feijoada Base', cocina: 'latina', imagen: '/assets/img/recetas/r4-feijoada.png', desc: 'Guiso brasileño de frijoles negros. Base concentrada para líneas de platos preparados.' },
+  { id: 'r5', titulo: 'Falafel Tradicional', cocina: 'arabe', imagen: '/assets/img/recetas/r5-falafel.png', desc: 'Croqueta de garbanzo especiada. Formato congelado para food service y retail vegano.' },
+  { id: 'r6', titulo: 'Arroz Frito Yangchow', cocina: 'asiatica', imagen: '/assets/img/recetas/r6-arrozfrito.png', desc: 'Arroz salteado con vegetales y proteína. Aplicación estrella para líneas de congelados asiáticos.' },
+  { id: 'r7', titulo: 'Tacos Al Pastor', cocina: 'latina', imagen: '/assets/img/recetas/r7-tacos.png', desc: 'Tortilla de maíz con carne especiada y piña. Formato kit para retail y HORECA.' },
+  { id: 'r8', titulo: 'Shawarma', cocina: 'arabe', imagen: '/assets/img/recetas/r8-shawarma.png', desc: 'Wrap de carne especiada con salsa de ajo. Producto estrella en street food y delivery.' },
+  { id: 'r9', titulo: 'Ramen Tonkotsu', cocina: 'asiatica', imagen: '/assets/img/recetas/r9-ramen.png', desc: 'Caldo de cerdo con noodles, huevo y chashu. Formato bowl para HORECA y meal kits.' }
 ];
 
 // FUNCIONES CORE
@@ -325,31 +325,51 @@ function initRecipes() {
   
   const filterCocina = document.getElementById('filter-receta-cocina');
   const grid = document.getElementById('recipes-grid');
+  const chips = document.querySelectorAll('#receta-chips-page .chip');
   
   if (filterCocina) filterCocina.value = qCocina;
+  if (chips.length) {
+    chips.forEach(c => {
+      c.classList.toggle('active', c.dataset.cocina === qCocina);
+    });
+  }
   
   function render() {
-    const sc = filterCocina.value;
+    const sc = filterCocina ? filterCocina.value : 'todas';
     const filtered = sc === 'todas' ? recetas : recetas.filter(r => r.cocina === sc);
     
     grid.innerHTML = filtered.map(r => `
-      <div class="card">
-        <div class="card-img" style="background: var(--surface);">
-            <span style="font-size: 3rem; opacity: 0.2;">🍲</span>
+      <a href="/recetas/receta.html?id=${r.id}" class="receta-card" data-testid="card-receta-${r.id}">
+        <div class="receta-card-img">
+          <img src="${r.imagen}" alt="${r.titulo}" loading="lazy" />
         </div>
-        <div class="card-body">
-          <span class="badge">${r.cocina}</span>
-          <h4 style="margin-bottom: 0.5rem;">${r.titulo}</h4>
-          <a href="/recetas/receta.html?id=${r.id}" class="text-primary font-semibold" style="font-size: 0.9rem; margin-top: auto;">Ver aplicación</a>
+        <div class="receta-card-body">
+          <span class="receta-card-badge receta-card-badge--${r.cocina}">${r.cocina}</span>
+          <h3>${r.titulo}</h3>
+          <p>${r.desc || ''}</p>
+          <span class="receta-card-cta">Ver aplicación →</span>
         </div>
-      </div>
+      </a>
     `).join('');
   }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      if (filterCocina) filterCocina.value = chip.dataset.cocina;
+      render();
+    });
+  });
   
   if (filterCocina) {
-    render();
-    filterCocina.addEventListener('change', render);
+    filterCocina.addEventListener('change', () => {
+      chips.forEach(c => c.classList.toggle('active', c.dataset.cocina === filterCocina.value));
+      render();
+    });
   }
+
+  render();
 }
 
 // DETALLE RECETA
