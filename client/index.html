@@ -250,54 +250,73 @@
       </div>
     </section>
 
-    <!-- ═══════════ INSPIRACIÓN / APLICACIONES ═══════════ -->
-    <section class="section-inspo-showcase" data-testid="section-inspiracion">
+    <!-- ═══════════ INSPIRACIÓN / APLICACIONES (ZIGZAG) ═══════════ -->
+    <section class="section-inspo-zigzag" data-testid="section-inspiracion">
       <div class="container">
         <div class="section-header-centered reveal">
           <span class="section-label">Tendencias</span>
           <h2>Inspiración & Aplicaciones</h2>
-          <p class="section-desc">Ideas de producto y aplicaciones reales con nuestros ingredientes. Desarrollo basado en tendencias de mercado.</p>
+          <p class="section-desc">Ideas de producto y aplicaciones reales con nuestros ingredientes étnicos, orientadas a la industria alimentaria y el canal HORECA.</p>
         </div>
 
-        <div class="inspo-showcase reveal" data-testid="inspo-showcase">
-          <a href="/recetas/?cocina=latina" class="inspo-card" data-testid="card-inspo-latina">
-            <div class="inspo-card-img">
-              <img src="/assets/img/inspo-latina.png" alt="Aplicaciones cocina latina" loading="lazy" />
-            </div>
-            <div class="inspo-card-overlay">
-              <span class="inspo-card-badge">Aplicaciones Latina</span>
-              <h3>Cocina Latina</h3>
-              <p>Arepas · Tacos · Feijoada · Guacamole</p>
-              <span class="inspo-card-cta">Ver aplicaciones →</span>
-            </div>
-          </a>
-
-          <a href="/recetas/?cocina=arabe" class="inspo-card" data-testid="card-inspo-arabe">
-            <div class="inspo-card-img">
-              <img src="/assets/img/inspo-arabe.png" alt="Aplicaciones cocina árabe" loading="lazy" />
-            </div>
-            <div class="inspo-card-overlay">
-              <span class="inspo-card-badge">Aplicaciones Árabe</span>
-              <h3>Cocina Árabe</h3>
-              <p>Hummus · Falafel · Shawarma · Mezze</p>
-              <span class="inspo-card-cta">Ver aplicaciones →</span>
-            </div>
-          </a>
-
-          <a href="/recetas/?cocina=asiatica" class="inspo-card" data-testid="card-inspo-asiatica">
-            <div class="inspo-card-img">
-              <img src="/assets/img/inspo-asiatica.png" alt="Aplicaciones cocina asiática" loading="lazy" />
-            </div>
-            <div class="inspo-card-overlay">
-              <span class="inspo-card-badge">Aplicaciones Asiática</span>
-              <h3>Cocina Asiática</h3>
-              <p>Ramen · Pad Thai · Sushi · Dim Sum</p>
-              <span class="inspo-card-cta">Ver aplicaciones →</span>
-            </div>
-          </a>
+        <div class="zigzag-row zigzag-row--img-left reveal" data-testid="zigzag-latina">
+          <div class="zigzag-img">
+            <a href="/recetas/?cocina=latina" data-testid="card-inspo-latina">
+              <img src="/assets/img/inspo-latina.png" alt="Aplicaciones de cocina latina: arepas, tacos, feijoada" loading="lazy" />
+            </a>
+          </div>
+          <div class="zigzag-text">
+            <span class="zigzag-badge zigzag-badge--latina">Cocina Latina</span>
+            <h3>Sabores de América Latina para tu línea de productos</h3>
+            <p>Harinas de maíz precocidas, frijoles negros y rojos, ajíes y conservas tropicales. Ingredientes clave para desarrollar arepas, tacos, empanadas, pupusas y platos preparados con sello latinoamericano. Ideales para líneas de food service, platos preparados y retail étnico.</p>
+            <ul class="zigzag-highlights">
+              <li>Arepas y tortillas industriales</li>
+              <li>Salsas y aderezos mexicanos</li>
+              <li>Feijoada y guisos brasileños</li>
+            </ul>
+            <a href="/recetas/?cocina=latina" class="btn btn-primary" data-testid="link-inspo-latina">Ver aplicaciones latinas →</a>
+          </div>
         </div>
 
-        <div class="inspo-showcase-footer reveal">
+        <div class="zigzag-row zigzag-row--img-right reveal" data-testid="zigzag-arabe">
+          <div class="zigzag-text">
+            <span class="zigzag-badge zigzag-badge--arabe">Cocina Árabe</span>
+            <h3>La despensa mediterránea oriental al servicio de la industria</h3>
+            <p>Especias auténticas, legumbres seleccionadas, tahini y conservas de Oriente Medio. Base para desarrollar hummus, falafel, shawarma, mezze y platos listos para el canal HORECA. Categoría en pleno crecimiento en Europa con alta demanda en retail y restauración.</p>
+            <ul class="zigzag-highlights">
+              <li>Hummus y cremas untables</li>
+              <li>Falafel y snacks proteicos</li>
+              <li>Shawarma y platos preparados</li>
+            </ul>
+            <a href="/recetas/?cocina=arabe" class="btn btn-primary" data-testid="link-inspo-arabe">Ver aplicaciones árabes →</a>
+          </div>
+          <div class="zigzag-img">
+            <a href="/recetas/?cocina=arabe" data-testid="card-inspo-arabe">
+              <img src="/assets/img/inspo-arabe.png" alt="Aplicaciones de cocina árabe: hummus, falafel, shawarma" loading="lazy" />
+            </a>
+          </div>
+        </div>
+
+        <div class="zigzag-row zigzag-row--img-left reveal" data-testid="zigzag-asiatica">
+          <div class="zigzag-img">
+            <a href="/recetas/?cocina=asiatica" data-testid="card-inspo-asiatica">
+              <img src="/assets/img/inspo-asiatica.png" alt="Aplicaciones de cocina asiática: ramen, pad thai, dim sum" loading="lazy" />
+            </a>
+          </div>
+          <div class="zigzag-text">
+            <span class="zigzag-badge zigzag-badge--asiatica">Cocina Asiática</span>
+            <h3>Ingredientes premium de Asia para innovación en producto</h3>
+            <p>Arroces especiales, fideos de arroz y trigo, salsas de soja y condimentos fermentados. Todo lo necesario para desarrollar ramen, pad thai, sushi, dim sum y bowls asiáticos. La cocina asiática lidera el crecimiento en tendencias de consumo en Europa.</p>
+            <ul class="zigzag-highlights">
+              <li>Ramen y noodle bowls</li>
+              <li>Pad Thai y wok dishes</li>
+              <li>Sushi y poke bowls</li>
+            </ul>
+            <a href="/recetas/?cocina=asiatica" class="btn btn-primary" data-testid="link-inspo-asiatica">Ver aplicaciones asiáticas →</a>
+          </div>
+        </div>
+
+        <div class="zigzag-footer reveal">
           <a href="/recetas/" class="btn btn-primary" data-testid="button-ver-recetas">Explorar todas las aplicaciones</a>
           <a href="/contacto.html" class="btn btn-outline" data-testid="button-consultar-aplicacion">Consultar aplicación a medida</a>
         </div>

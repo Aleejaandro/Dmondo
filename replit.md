@@ -27,6 +27,9 @@ Multi-page B2B brochure/catalog website for DMONDO (D'Mondo Food), the ethnic fo
 ## Home — Cocinas Showcase
 Three visual cards (Latina, Árabe, Asiática) with hero images, overlay text, and CTAs linking to `/productos/?cocina=X`. Purely visual "storefront" — no interactive filtering.
 
+## Home — Inspiración Zigzag
+Three zigzag rows alternating image-left/text-right and text-left/image-right. Each row has a cuisine image + descriptive text with badge, h3, paragraph, bullet highlights, and CTA linking to `/recetas/?cocina=X`. Images: `inspo-latina.png`, `inspo-arabe.png`, `inspo-asiatica.png`. CSS classes: `.zigzag-row`, `.zigzag-row--img-left`, `.zigzag-row--img-right`, `.zigzag-img`, `.zigzag-text`, `.zigzag-badge`, `.zigzag-highlights`.
+
 ## Catálogo B2B (`/productos/`) — Full Explorer
 The accordion sidebar explorer lives on the productos page:
 - **Topbar**: Search input + "Solicitar catálogo" CTA
