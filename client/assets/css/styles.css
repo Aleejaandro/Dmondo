@@ -267,6 +267,117 @@ header {
 }
 .section-explorador .container { max-width: 1200px; }
 
+/* ── Cocinas Showcase (Home) ── */
+.section-cocinas-showcase {
+  padding: 5rem 0 4rem;
+  background: var(--surface);
+}
+
+.cocinas-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 2.5rem;
+}
+
+.cocina-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  min-height: 340px;
+  box-shadow: 0 8px 30px rgba(15,23,42,.12);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.cocina-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(15,23,42,.18);
+}
+
+.cocina-card-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.cocina-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.cocina-card:hover .cocina-card-img img {
+  transform: scale(1.06);
+}
+
+.cocina-card-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 28px 24px;
+  background: linear-gradient(to top, rgba(15,23,42,.82) 0%, rgba(15,23,42,.35) 50%, rgba(15,23,42,.05) 100%);
+}
+
+.cocina-card-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: rgba(194,65,12,.85);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.cocina-card-overlay h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.cocina-card-overlay p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,.8);
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+
+.cocina-card-cta {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: var(--transition);
+}
+.cocina-card:hover .cocina-card-cta {
+  color: #fff;
+  letter-spacing: .02em;
+}
+
+.cocinas-showcase-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 2.5rem;
+}
+
+/* FAQ */
+.faq-list { margin-top: 2rem; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-item h4 { margin-bottom: 0.5rem; font-size: 1rem; }
+
 .explorador-shell {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -1097,6 +1208,8 @@ section {
 }
 
 @media (max-width: 980px) {
+  .cocinas-showcase { grid-template-columns: 1fr; gap: 16px; }
+  .cocina-card { min-height: 240px; }
   .cc-body { grid-template-columns: 1fr; }
   .cc-sidebar {
     border-right: none;

@@ -4,117 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cocinas del Mundo | DMONDO B2B</title>
-  <meta name="description" content="Explora las tres líneas de ingredientes étnicos DMONDO: Cocina Latina, Cocina Árabe y Cocina Asiática. Categorías, formatos y aplicaciones industriales.">
+  <meta name="description" content="Explora las tres líneas de ingredientes étnicos DMONDO: Cocina Latina, Cocina Árabe y Cocina Asiática.">
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <script>
+    (function() {
+      var params = window.location.search;
+      window.location.replace('/productos/' + params);
+    })();
+  </script>
 </head>
 <body>
-  <header>
-    <div class="container nav-container">
-      <a href="/" class="logo" data-testid="link-home">
-        <img src="/assets/img/logo.png" alt="D'Mondo Food" />
-      </a>
-      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" data-testid="button-mobile-menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-      <nav class="nav-links">
-        <a href="/cocinas/" class="nav-active" data-testid="link-cocinas">Cocinas</a>
-        <a href="/productos/" data-testid="link-catalogo">Catálogo B2B</a>
-        <a href="/recetas/" data-testid="link-inspiracion">Inspiración</a>
-        <a href="/calidad.html" data-testid="link-calidad">Calidad</a>
-        <a href="/contacto.html" class="nav-cta" data-testid="link-contacto">Hablar con ventas</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="cocinas-hero">
-      <div class="container">
-        <span class="section-label">Nuestras líneas</span>
-        <h1>Cocinas del Mundo</h1>
-        <p class="cocinas-hero-desc">Selecciona una cocina, explora categorías y descubre los productos disponibles. Todo en una sola vista.</p>
-      </div>
-    </section>
-
-    <section class="section-explorador section-explorador--page" data-testid="section-explorador-page">
-      <div class="container">
-        <div class="explorador-shell">
-          <div class="cc-topbar">
-            <div class="cc-search-wrap" data-testid="cc-search-wrap">
-              <svg class="cc-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" id="cc-search" class="cc-search-input" placeholder="Busca producto o categoría…" autocomplete="off" data-testid="input-cc-search" aria-label="Buscar producto o categoría">
-            </div>
-            <div class="cc-topbar-actions">
-              <a id="cta-cocina" class="btn btn-primary" href="/contacto.html#catalogo" data-testid="button-cta-cocina">Solicitar catálogo</a>
-              <a href="/productos/" class="cc-link-catalog" data-testid="link-abrir-filtros">Abrir catálogo completo →</a>
-            </div>
-            <span class="cc-micro">Fichas técnicas bajo solicitud · 24–48h</span>
-          </div>
-
-          <div class="cc-body">
-            <nav class="cc-sidebar" id="cc-nav" aria-label="Explorador de cocinas" data-testid="cc-sidebar"></nav>
-
-            <div class="cc-main">
-              <div class="panel-prods-header">
-                <h3 class="cc-col-title" id="cc-prods-title" data-testid="text-prods-title">Productos Destacados</h3>
-              </div>
-              <div id="cc-products-grid" class="products-grid" data-testid="cc-products-grid"></div>
-
-              <div class="cc-apps">
-                <h3 class="cc-col-title">Aplicaciones</h3>
-                <div id="cc-apps-content" class="apps-bullets" data-testid="cc-apps-content"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="background: var(--bg);">
-      <div class="container">
-        <div class="cta-box">
-          <h2>¿Necesitas un producto que no encuentras?</h2>
-          <p class="text-muted">Contacta con nuestro equipo comercial para formulaciones a medida, importación directa y fichas técnicas.</p>
-          <div class="cta-actions">
-            <a href="/contacto.html" class="btn btn-primary" data-testid="button-cta-contacto">Hablar con ventas</a>
-            <a href="/productos/" class="btn btn-outline" data-testid="button-cta-catalogo">Ver catálogo completo</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="footer-logo">
-            <img src="/assets/img/logo.png" alt="D'Mondo Food" />
-          </div>
-          <p class="text-muted footer-desc">Importación y distribución B2B de ingredientes étnicos premium para profesionales de la alimentación.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Navegación</h4>
-          <ul>
-            <li><a href="/cocinas/">Cocinas del Mundo</a></li>
-            <li><a href="/productos/">Catálogo de Productos</a></li>
-            <li><a href="/recetas/">Aplicaciones y Recetas</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Corporativo</h4>
-          <ul>
-            <li><a href="/calidad.html">Políticas de Calidad</a></li>
-            <li><a href="/contacto.html">Contacto B2B</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>DMONDO es el portfolio étnico del grupo ABM Crops. Portfolio tradicional: <a href="https://productosdonjose.es" target="_blank" rel="noopener noreferrer">Productos Don José</a>.</p>
-        <p>&copy; 2026 DMONDO. Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script type="module" src="/assets/js/app.js"></script>
+  <p>Redirigiendo al catálogo...</p>
 </body>
 </html>

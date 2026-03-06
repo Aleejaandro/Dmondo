@@ -29,7 +29,6 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <nav class="nav-links">
-        <a href="/cocinas/" data-testid="link-cocinas">Cocinas</a>
         <a href="/productos/" data-testid="link-catalogo">Catálogo B2B</a>
         <a href="/recetas/" data-testid="link-inspiracion">Inspiración</a>
         <a href="/calidad.html" data-testid="link-calidad">Calidad</a>
@@ -96,43 +95,56 @@
       </div>
     </section>
 
-    <!-- ═══════════ EXPLORADOR DE COCINAS (PROTAGONISTA) ═══════════ -->
-    <section class="section-explorador" data-testid="section-explorador">
+    <!-- ═══════════ NUESTRAS COCINAS (ESCAPARATE) ═══════════ -->
+    <section class="section-cocinas-showcase" data-testid="section-cocinas-showcase">
       <div class="container">
         <div class="section-header-centered reveal">
-          <span class="section-label">Descubre nuestras líneas</span>
-          <h2>Explorador de Cocinas</h2>
-          <p class="section-desc">Selecciona una región para descubrir categorías, formatos y aplicaciones industriales.</p>
+          <span class="section-label">Nuestras líneas</span>
+          <h2>Tres Cocinas, Un Portfolio Global</h2>
+          <p class="section-desc">Ingredientes auténticos de las tres grandes tradiciones culinarias, listos para la industria alimentaria europea.</p>
         </div>
 
-        <div class="explorador-shell reveal">
-          <div class="cc-topbar">
-            <div class="cc-search-wrap" data-testid="cc-search-wrap">
-              <svg class="cc-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" id="cc-search" class="cc-search-input" placeholder="Busca producto o categoría…" autocomplete="off" data-testid="input-cc-search" aria-label="Buscar producto o categoría">
+        <div class="cocinas-showcase reveal" data-testid="cocinas-showcase">
+          <a href="/productos/?cocina=latina" class="cocina-card" data-testid="card-cocina-latina">
+            <div class="cocina-card-img">
+              <img src="/assets/img/cocina-latina.png" alt="Ingredientes de cocina latina" loading="lazy" />
             </div>
-            <div class="cc-topbar-actions">
-              <a id="cta-cocina" class="btn btn-primary" href="/contacto.html#catalogo" data-testid="button-cta-cocina">Solicitar catálogo</a>
-              <a href="/productos/" class="cc-link-catalog" data-testid="link-abrir-filtros">Abrir catálogo completo →</a>
+            <div class="cocina-card-overlay">
+              <span class="cocina-card-badge">Línea Latina</span>
+              <h3>Latina</h3>
+              <p>Harinas de maíz · Frijoles · Conservas y ajíes</p>
+              <span class="cocina-card-cta">Explorar línea →</span>
             </div>
-            <span class="cc-micro">Fichas técnicas bajo solicitud · 24–48h</span>
-          </div>
+          </a>
 
-          <div class="cc-body">
-            <nav class="cc-sidebar" id="cc-nav" aria-label="Explorador de cocinas" data-testid="cc-sidebar"></nav>
-
-            <div class="cc-main">
-              <div class="panel-prods-header">
-                <h3 class="cc-col-title" id="cc-prods-title" data-testid="text-prods-title">Productos Destacados</h3>
-              </div>
-              <div id="cc-products-grid" class="products-grid" data-testid="cc-products-grid"></div>
-
-              <div class="cc-apps">
-                <h3 class="cc-col-title">Aplicaciones</h3>
-                <div id="cc-apps-content" class="apps-bullets" data-testid="cc-apps-content"></div>
-              </div>
+          <a href="/productos/?cocina=arabe" class="cocina-card" data-testid="card-cocina-arabe">
+            <div class="cocina-card-img">
+              <img src="/assets/img/cocina-arabe.png" alt="Ingredientes de cocina árabe" loading="lazy" />
             </div>
-          </div>
+            <div class="cocina-card-overlay">
+              <span class="cocina-card-badge">Línea Árabe</span>
+              <h3>Árabe</h3>
+              <p>Especias y mezclas · Legumbres · Tahini y conservas</p>
+              <span class="cocina-card-cta">Explorar línea →</span>
+            </div>
+          </a>
+
+          <a href="/productos/?cocina=asiatica" class="cocina-card" data-testid="card-cocina-asiatica">
+            <div class="cocina-card-img">
+              <img src="/assets/img/cocina-asiatica.png" alt="Ingredientes de cocina asiática" loading="lazy" />
+            </div>
+            <div class="cocina-card-overlay">
+              <span class="cocina-card-badge">Línea Asiática</span>
+              <h3>Asiática</h3>
+              <p>Arroces premium · Salsas y condimentos · Fideos</p>
+              <span class="cocina-card-cta">Explorar línea →</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="cocinas-showcase-footer reveal">
+          <a href="/productos/" class="btn btn-primary" data-testid="button-ver-catalogo">Ver catálogo completo</a>
+          <a href="/contacto.html#catalogo" class="btn btn-outline" data-testid="button-solicitar-catalogo">Solicitar catálogo PDF</a>
         </div>
       </div>
     </section>
@@ -318,8 +330,7 @@
         <div class="footer-col">
           <h4>Navegación</h4>
           <ul>
-            <li><a href="/cocinas/" data-testid="footer-link-cocinas">Cocinas del Mundo</a></li>
-            <li><a href="/productos/" data-testid="footer-link-productos">Catálogo de Productos</a></li>
+            <li><a href="/productos/" data-testid="footer-link-productos">Catálogo B2B</a></li>
             <li><a href="/recetas/" data-testid="footer-link-recetas">Aplicaciones y Recetas</a></li>
           </ul>
         </div>

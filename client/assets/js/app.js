@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initChips();
   
   if (document.getElementById('cc-nav')) initHome();
-  if (document.getElementById('catalog-grid')) initCatalog();
   if (document.getElementById('recipes-grid')) initRecipes();
   if (document.getElementById('recipe-detail')) initRecipeDetail();
   if (document.getElementById('contact-form')) initContactForm();
@@ -169,13 +168,15 @@ function initChips() {
   });
 }
 
+const isFullCatalog = window.location.pathname.startsWith('/productos');
+
 function renderProducts(cocina, categoriaId, searchQuery) {
   const prodGrid = document.getElementById('cc-products-grid');
   if (!prodGrid) return;
   let prods = productos.filter(p => p.cocina === cocina);
   if (categoriaId) {
     prods = prods.filter(p => p.categoria === categoriaId);
-  } else {
+  } else if (!isFullCatalog) {
     prods = prods.slice(0, 6);
   }
 
@@ -353,85 +354,13 @@ function initHome() {
   }
 }
 
-// CATÁLOGO B2B
-function initCatalog() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const qCocina = urlParams.get('cocina') || 'todas';
-  const qCat = urlParams.get('categoria') || '';
-
-  const filterCocina = document.getElementById('filter-cocina');
-  const filterCat = document.getElementById('filter-categoria');
-  const searchInput = document.getElementById('search-prod');
-  const grid = document.getElementById('catalog-grid');
-  
-  if (filterCocina) filterCocina.value = qCocina;
-  
-  function updateCatOptions() {
-    const selectedCocina = filterCocina.value;
-    let cats = categorias;
-    if (selectedCocina !== 'todas') {
-      cats = categorias.filter(c => c.cocina === selectedCocina);
-    }
-    
-    filterCat.innerHTML = '<option value="">Todas las categorías</option>' + 
-      cats.map(c => `<option value="${c.id}" ${c.id === qCat ? 'selected' : ''}>${c.nombre}</option>`).join('');
-  }
-  
-  function renderProducts() {
-    const sc = filterCocina.value;
-    const sCat = filterCat.value;
-    const term = searchInput.value.toLowerCase();
-    
-    const filtered = productos.filter(p => {
-      const matchCocina = sc === 'todas' || p.cocina === sc;
-      const matchCat = sCat === '' || p.categoria === sCat;
-      const matchSearch = p.nombre.toLowerCase().includes(term);
-      return matchCocina && matchCat && matchSearch;
-    });
-    
-    if (filtered.length === 0) {
-      grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 2rem;" class="text-muted">No se encontraron productos.</div>';
-      return;
-    }
-    
-    grid.innerHTML = filtered.map(p => `
-      <div class="card">
-        <div class="card-img">
-          ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />` : `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`}
-        </div>
-        <div class="card-body">
-          <div style="display:flex; justify-content:space-between; margin-bottom: 1rem;">
-            <span class="badge" style="margin:0">${p.formato}</span>
-            <span class="text-muted" style="font-size: 0.8rem; text-transform: capitalize;">${p.cocina}</span>
-          </div>
-          <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">${p.nombre}</h4>
-          <div style="display:flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-            ${p.etiquetas.map(e => `<span style="font-size:0.75rem; background: var(--bg); padding: 0.15rem 0.5rem; border-radius: 4px;">${e}</span>`).join('')}
-          </div>
-          <button onclick="openModal()" class="btn btn-outline" style="width:100%; padding: 0.5rem; margin-top: auto;">Solicitar Ficha Técnica</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  if (filterCocina) {
-    updateCatOptions();
-    renderProducts();
-    
-    filterCocina.addEventListener('change', () => {
-      updateCatOptions();
-      renderProducts();
-    });
-    filterCat.addEventListener('change', renderProducts);
-    searchInput.addEventListener('input', renderProducts);
-  }
-}
-
 window.openModal = function() {
-  document.getElementById('ficha-modal').classList.add('active');
+  const modal = document.getElementById('ficha-modal');
+  if (modal) modal.classList.add('active');
 }
 window.closeModal = function() {
-  document.getElementById('ficha-modal').classList.remove('active');
+  const modal = document.getElementById('ficha-modal');
+  if (modal) modal.classList.remove('active');
 }
 
 // RECETAS

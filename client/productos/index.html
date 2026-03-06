@@ -4,108 +4,160 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Productos B2B | DMONDO</title>
+  <meta name="description" content="Explora el catálogo completo de ingredientes étnicos DMONDO: cocina latina, árabe y asiática para retail, industria y HORECA.">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <header>
     <div class="container nav-container">
-      <a href="/" class="logo" style="display: flex; align-items: center;">
-        <img src="/assets/img/logo.png" alt="DMONDO" style="height: 80px; width: auto;" />
+      <a href="/" class="logo" data-testid="link-home">
+        <img src="/assets/img/logo.png" alt="D'Mondo Food" />
       </a>
-      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" data-testid="button-mobile-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <nav class="nav-links">
-        <a href="/cocinas/">Cocinas</a>
-        <a href="/productos/" class="text-primary">Catálogo B2B</a>
-        <a href="/recetas/">Inspiración</a>
-        <a href="/calidad.html">Calidad</a>
-        <a href="/contacto.html" class="text-primary font-semibold">Hablar con ventas</a>
+        <a href="/productos/" class="nav-active" data-testid="link-catalogo">Catálogo B2B</a>
+        <a href="/recetas/" data-testid="link-inspiracion">Inspiración</a>
+        <a href="/calidad.html" data-testid="link-calidad">Calidad</a>
+        <a href="/contacto.html" class="nav-cta" data-testid="link-contacto">Hablar con ventas</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="container" style="padding-top: 3rem;">
-      <h1 style="margin-bottom: 2rem;">Catálogo Profesional</h1>
-      
-      <div class="catalog-layout">
-        <!-- Sidebar Filtros -->
-        <aside class="filters-sidebar">
-          <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Filtros</h3>
-          
-          <div class="form-group">
-            <label class="form-label">Buscar producto</label>
-            <input type="text" id="search-prod" class="form-control" placeholder="Ej. Harina, Arroz...">
+    <section class="section-explorador section-explorador--page" data-testid="section-explorador">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="section-label">Catálogo B2B</span>
+          <h2>Explorador de Productos</h2>
+          <p class="section-desc">Navega por cocina y categoría. Solicita fichas técnicas, alérgenos y precios por volumen.</p>
+        </div>
+
+        <div class="explorador-shell">
+          <div class="cc-topbar">
+            <div class="cc-search-wrap" data-testid="cc-search-wrap">
+              <svg class="cc-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="cc-search" class="cc-search-input" placeholder="Busca producto o categoría…" autocomplete="off" data-testid="input-cc-search" aria-label="Buscar producto o categoría">
+            </div>
+            <div class="cc-topbar-actions">
+              <a class="btn btn-primary" href="/contacto.html#catalogo" data-testid="button-cta-cocina">Solicitar catálogo</a>
+            </div>
+            <span class="cc-micro">Fichas técnicas bajo solicitud · 24–48h</span>
           </div>
-          
-          <div class="form-group">
-            <label class="form-label">Región / Cocina</label>
-            <select id="filter-cocina" class="form-control">
-              <option value="todas">Todas las cocinas</option>
-              <option value="latina">Cocina Latina</option>
-              <option value="arabe">Cocina Árabe</option>
-              <option value="asiatica">Cocina Asiática</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Categoría</label>
-            <select id="filter-categoria" class="form-control">
-              <option value="">Todas las categorías</option>
-              <!-- Dinámico -->
-            </select>
-          </div>
-        </aside>
-        
-        <!-- Grid Productos -->
-        <div>
-          <div id="catalog-grid" class="grid-3">
-            <!-- Render via JS -->
+
+          <div class="cc-body">
+            <nav class="cc-sidebar" id="cc-nav" aria-label="Explorador de cocinas" data-testid="cc-sidebar"></nav>
+
+            <div class="cc-main">
+              <div class="panel-prods-header">
+                <h3 class="cc-col-title" id="cc-prods-title" data-testid="text-prods-title">Productos Destacados</h3>
+              </div>
+              <div id="cc-products-grid" class="products-grid" data-testid="cc-products-grid"></div>
+
+              <div class="cc-apps">
+                <h3 class="cc-col-title">Aplicaciones</h3>
+                <div id="cc-apps-content" class="apps-bullets" data-testid="cc-apps-content"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ B2B -->
-    <section class="container" style="padding-top: 2rem;">
-      <h2>Preguntas Frecuentes B2B</h2>
-      <div style="max-width: 800px; margin-top: 2rem;">
-        <div style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem;">
-          <h4 style="margin-bottom: 0.5rem;">¿Cuál es el pedido mínimo (MOQ)?</h4>
-          <p class="text-muted">Depende del formato y producto. Trabajamos palets completos para industria y cajas/displays para retail. Contacte con ventas para su caso específico.</p>
+    <section class="section" style="background: var(--bg);">
+      <div class="container" style="max-width: 800px;">
+        <div class="section-header-centered">
+          <span class="section-label">FAQ</span>
+          <h2>Preguntas Frecuentes B2B</h2>
         </div>
-        <div style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem;">
-          <h4 style="margin-bottom: 0.5rem;">¿Hacen desarrollo de Private Label (Marca Blanca)?</h4>
-          <p class="text-muted">Sí, gestionamos todo el proceso desde el envasado hasta el etiquetado personalizado para cadenas de supermercados.</p>
+        <div class="faq-list" data-testid="faq-list">
+          <div class="faq-item" data-testid="faq-moq">
+            <h4>¿Cuál es el pedido mínimo (MOQ)?</h4>
+            <p class="text-muted">Depende del formato y producto. Trabajamos palets completos para industria y cajas/displays para retail. Contacte con ventas para su caso específico.</p>
+          </div>
+          <div class="faq-item" data-testid="faq-private-label">
+            <h4>¿Hacen desarrollo de Private Label (Marca Blanca)?</h4>
+            <p class="text-muted">Sí, gestionamos todo el proceso desde el envasado hasta el etiquetado personalizado para cadenas de supermercados.</p>
+          </div>
+          <div class="faq-item" data-testid="faq-fichas">
+            <h4>¿Proporcionan fichas técnicas y certificados?</h4>
+            <p class="text-muted">Cada lote cuenta con su ficha técnica, alérgenos y certificados de calidad (IFS/BRC/Halal según aplique).</p>
+          </div>
+          <div class="faq-item" data-testid="faq-stock">
+            <h4>¿Tienen stock de seguridad en España/Europa?</h4>
+            <p class="text-muted">Sí, operamos almacenes logísticos que nos permiten garantizar el suministro continuo sin roturas de stock.</p>
+          </div>
         </div>
-        <div style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem;">
-          <h4 style="margin-bottom: 0.5rem;">¿Proporcionan fichas técnicas y certificados?</h4>
-          <p class="text-muted">Absolutamente. Cada lote cuenta con su ficha técnica, alérgenos y certificados de calidad (IFS/BRC/Halal según aplique).</p>
-        </div>
-        <div style="padding-bottom: 1rem;">
-          <h4 style="margin-bottom: 0.5rem;">¿Tienen stock de seguridad en España/Europa?</h4>
-          <p class="text-muted">Sí, operamos almacenes logísticos que nos permiten garantizar el suministro continuo a nuestros clientes regulares sin roturas de stock.</p>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--surface);">
+      <div class="container">
+        <div class="cta-box">
+          <h2>¿Necesitas un producto que no encuentras?</h2>
+          <p class="text-muted">Contacta con nuestro equipo comercial para formulaciones a medida, importación directa y fichas técnicas.</p>
+          <div class="cta-actions">
+            <a href="/contacto.html" class="btn btn-primary" data-testid="button-cta-contacto">Hablar con ventas</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Modal Ficha Técnica -->
+  <footer>
+    <div class="footer-accent"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <div class="footer-logo">
+            <img src="/assets/img/logo.png" alt="D'Mondo Food" />
+          </div>
+          <p class="text-muted footer-desc">Importación y distribución B2B de ingredientes étnicos premium para profesionales de la alimentación.</p>
+          <div class="footer-badges">
+            <span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Grupo ABM Crops</span>
+            <span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> IFS · BRC</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Navegación</h4>
+          <a href="/">Inicio</a>
+          <a href="/productos/">Catálogo B2B</a>
+          <a href="/recetas/">Inspiración</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Empresa</h4>
+          <a href="/calidad.html">Calidad y certificaciones</a>
+          <a href="/contacto.html">Contacto comercial</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Contacto directo</h4>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:info@dmondo.com">info@dmondo.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+34900000000">+34 900 000 000</a>
+          </div>
+          <a href="/contacto.html" class="btn btn-primary footer-cta" data-testid="button-footer-cta">Solicitar información</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-brand">DMONDO · Portfolio Étnico del Grupo ABM Crops</div>
+        <div class="footer-bottom-copy">© 2025 D'Mondo Food. Todos los derechos reservados.</div>
+      </div>
+    </div>
+  </footer>
+
   <div id="ficha-modal" class="modal-overlay">
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">×</button>
       <h3 style="margin-bottom: 1rem;">Solicitar Ficha Técnica</h3>
-      <p class="text-muted" style="margin-bottom: 1.5rem;">Para recibir especificaciones técnicas, certificados de alérgenos y precios por volumen, por favor contacte a ventas.</p>
+      <p class="text-muted" style="margin-bottom: 1.5rem;">Para recibir especificaciones técnicas, certificados y precios por volumen, contacte a ventas.</p>
       <a href="/contacto.html" class="btn btn-primary" style="display:block; width:100%">Ir a formulario de contacto</a>
     </div>
   </div>
-
-  <footer>
-    <div class="container">
-      <div class="footer-bottom">
-        <p>DMONDO es el portfolio étnico del grupo ABM Crops.</p>
-      </div>
-    </div>
-  </footer>
 
   <script type="module" src="/assets/js/app.js"></script>
 </body>

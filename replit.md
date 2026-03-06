@@ -24,15 +24,19 @@ Multi-page B2B brochure/catalog website for DMONDO (D'Mondo Food), the ethnic fo
 | `/calidad.html` | `client/calidad.html` | Quality & certifications |
 | `/contacto.html` | `client/contacto.html` | B2B contact form |
 
-## Explorador "Command Center"
-The cuisine explorer (used on home page and `/cocinas/`) uses an accordion sidebar layout:
-- **Topbar**: Search input + "Solicitar catálogo" CTA + "Abrir catálogo completo" link
-- **Sidebar (210px)**: Accordion with 3 cuisine groups (Latina / Árabe / Asiática). Each group expands to show its categories inline. One group is always open.
-- **Main area**: Single product grid (3 columns on desktop) + applications row. Content updates dynamically when switching cuisines or categories.
+## Home — Cocinas Showcase
+Three visual cards (Latina, Árabe, Asiática) with hero images, overlay text, and CTAs linking to `/productos/?cocina=X`. Purely visual "storefront" — no interactive filtering.
+
+## Catálogo B2B (`/productos/`) — Full Explorer
+The accordion sidebar explorer lives on the productos page:
+- **Topbar**: Search input + "Solicitar catálogo" CTA
+- **Sidebar (210px)**: Accordion with 3 cuisine groups. Each expands to show categories inline. One group always open.
+- **Main area**: Single product grid (3 columns, scrollable) + applications row. Shows ALL products per cuisine (no 6-item limit).
 - Key IDs: `#cc-nav` (sidebar), `#cc-products-grid` (single product grid), `#cc-prods-title`, `#cc-apps-content`
-- `initHome()` triggered by presence of `#cc-nav` in DOM; builds sidebar dynamically from JS data
+- `initHome()` triggered by presence of `#cc-nav` in DOM; `isFullCatalog` flag controls whether products are limited
 - URL parameter `?cocina=X` pre-selects the cuisine on load
-- Applications data is stored in JS `aplicaciones` object and rendered dynamically per cuisine
+- Applications data stored in JS `aplicaciones` object, rendered dynamically per cuisine
+- FAQ section below the explorer
 
 ## API Endpoints
 - `POST /api/contact` — Submit contact form (persisted to PostgreSQL)
