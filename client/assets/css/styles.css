@@ -155,68 +155,122 @@ header {
    HERO
    ══════════════════════════ */
 .hero {
-  background: linear-gradient(160deg, var(--bg) 0%, #FFE8D4 40%, #FFDCC5 100%);
   position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   padding-bottom: 0;
 }
 
-.hero-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  padding: 5rem 0 4rem;
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.06); }
 }
 
-.hero-content {
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    rgba(15,23,42,.88) 0%,
+    rgba(15,23,42,.65) 45%,
+    rgba(15,23,42,.25) 75%,
+    rgba(15,23,42,.10) 100%
+  );
+}
+
+.hero-body {
   position: relative;
   z-index: 2;
+  max-width: 620px;
+  padding: 7rem 0 5rem;
 }
 
 .hero-eyebrow {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--primary);
-  background: rgba(194, 65, 12, 0.08);
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  border: 1px solid rgba(212,160,23,.4);
   padding: 0.35rem 1rem;
   border-radius: 999px;
   margin-bottom: 1.5rem;
 }
 
-.hero-content h1 {
-  font-size: 2.8rem;
-  line-height: 1.15;
-  margin: 0 0 1rem;
+.hero-body h1 {
+  font-size: 3.2rem;
+  line-height: 1.1;
+  margin: 0 0 1.25rem;
+  color: #fff;
+  font-weight: 800;
 }
 
 .hero-sub {
-  font-size: 1.1rem;
-  color: var(--muted);
+  font-size: 1.15rem;
+  color: rgba(255,255,255,.75);
   line-height: 1.7;
-  max-width: 480px;
-  margin: 0 0 2rem;
+  max-width: 500px;
+  margin: 0 0 2.25rem;
 }
 
-.hero-visual {
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 16px 48px rgba(15,23,42,.14);
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
-.hero-visual img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
+
+.btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.4);
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
+.btn-outline-light:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.7);
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-anim {
+  opacity: 0;
+  animation: heroFadeUp .7s ease forwards;
+}
+.hero-anim--1 { animation-delay: .15s; }
+.hero-anim--2 { animation-delay: .35s; }
+.hero-anim--3 { animation-delay: .55s; }
+.hero-anim--4 { animation-delay: .75s; }
 
 .hero-band {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
+  background: rgba(15,23,42,.92);
+  border-top: 1px solid rgba(255,255,255,.08);
   padding: 1.25rem 0;
   position: relative;
   z-index: 2;
@@ -230,14 +284,14 @@ header {
   gap: 0.6rem;
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--ink);
+  color: rgba(255,255,255,.85);
 }
 
 .hero-bullet-sep {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--border);
+  background: rgba(255,255,255,.25);
 }
 
 /* ══════════════════════════
@@ -1361,9 +1415,11 @@ section {
   .nav-cta { text-align: center; margin-top: 0.5rem; }
   .mobile-menu-btn { display: block; }
 
-  .hero-split { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0 2.5rem; }
-  .hero-visual { order: -1; }
-  .hero-content h1 { font-size: 2rem; }
+  .hero { min-height: 75vh; }
+  .hero-body { padding: 4rem 0 3rem; }
+  .hero-body h1 { font-size: 2.2rem; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; justify-content: center; text-align: center; }
 
   .hero-band-inner { gap: 1.25rem; }
   .hero-bullet-sep { display: none; }

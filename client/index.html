@@ -39,18 +39,20 @@
 
   <main>
 
-    <!-- ═══════════ HERO SPLIT ═══════════ -->
+    <!-- ═══════════ HERO INMERSIVO ═══════════ -->
     <section class="hero" data-testid="section-hero">
+      <div class="hero-bg">
+        <img src="/assets/img/hero-dark.png" alt="Ingredientes étnicos organizados por cocina" data-testid="img-hero" />
+      </div>
+      <div class="hero-overlay"></div>
       <div class="container">
-        <div class="hero-split reveal">
-          <div class="hero-content">
-            <span class="hero-eyebrow" data-testid="text-hero-eyebrow">Portfolio Étnico B2B</span>
-            <h1>El sabor del mundo,<br>listo para tu negocio</h1>
-            <p class="hero-sub">Ingredientes auténticos de cocina latina, árabe y asiática para retail, industria y HORECA.</p>
+        <div class="hero-body">
+          <span class="hero-eyebrow hero-anim hero-anim--1" data-testid="text-hero-eyebrow">Portfolio Étnico B2B</span>
+          <h1 class="hero-anim hero-anim--2">El sabor del mundo,<br>listo para tu negocio</h1>
+          <p class="hero-sub hero-anim hero-anim--3">Ingredientes auténticos de cocina latina, árabe y asiática para retail, industria y HORECA.</p>
+          <div class="hero-actions hero-anim hero-anim--4">
             <a href="/contacto.html#catalogo" class="btn btn-primary btn-lg" data-testid="button-solicitar-catalogo">Solicitar catálogo</a>
-          </div>
-          <div class="hero-visual">
-            <img src="/assets/img/hero-ingredients.png" alt="Ingredientes étnicos organizados por cocina: latina, árabe y asiática" data-testid="img-hero" />
+            <a href="/productos/" class="btn btn-outline-light btn-lg" data-testid="button-explorar-catalogo">Explorar productos</a>
           </div>
         </div>
       </div>
@@ -58,17 +60,17 @@
         <div class="container">
           <div class="hero-band-inner">
             <span class="hero-bullet" data-testid="text-bullet-b2b">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
               Formatos B2B
             </span>
             <span class="hero-bullet-sep" aria-hidden="true"></span>
             <span class="hero-bullet" data-testid="text-bullet-label">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
               Private label
             </span>
             <span class="hero-bullet-sep" aria-hidden="true"></span>
             <span class="hero-bullet" data-testid="text-bullet-cert">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               Certificaciones GFSI
             </span>
           </div>
