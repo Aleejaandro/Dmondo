@@ -186,10 +186,10 @@ header {
   z-index: 1;
   background: linear-gradient(
     105deg,
-    rgba(60,20,5,.82) 0%,
-    rgba(60,20,5,.55) 40%,
-    rgba(60,20,5,.18) 70%,
-    rgba(60,20,5,.05) 100%
+    rgba(30,20,10,.80) 0%,
+    rgba(30,20,10,.50) 40%,
+    rgba(30,20,10,.15) 70%,
+    rgba(30,20,10,.03) 100%
   );
 }
 
@@ -269,7 +269,7 @@ header {
 .hero-anim--4 { animation-delay: .75s; }
 
 .hero-band {
-  background: rgba(60,20,5,.85);
+  background: rgba(30,20,10,.88);
   border-top: 1px solid rgba(255,255,255,.10);
   padding: 1.25rem 0;
   position: relative;
