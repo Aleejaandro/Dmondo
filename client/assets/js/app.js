@@ -136,37 +136,7 @@ function applySearch() {
   renderProducts(cocinaActiva, categoriaActiva, q);
 }
 
-// Chip filters for inspiration carousel
-function initChips() {
-  const chips = document.querySelectorAll('#receta-chips .chip');
-  if (!chips.length) return;
-
-  function renderCarousel(cocina) {
-    const carousel = document.getElementById('home-recetas-carousel');
-    if (!carousel) return;
-    const filtered = cocina === 'todas' ? recetas : recetas.filter(r => r.cocina === cocina);
-    carousel.innerHTML = filtered.map(r => `
-      <div class="card" data-testid="card-receta-${r.id}">
-        <div class="card-img">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="card-body">
-          <span class="badge" style="text-transform: capitalize;">${r.cocina}</span>
-          <h4 style="margin-bottom: 0.5rem;">${r.titulo}</h4>
-          <a href="/recetas/receta.html?id=${r.id}" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Ver aplicación →</a>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      renderCarousel(chip.dataset.cocina);
-    });
-  });
-}
+function initChips() {}
 
 const isFullCatalog = window.location.pathname.startsWith('/productos');
 
@@ -337,21 +307,6 @@ function initHome() {
   const startCocina = (urlCocina && cocinas.includes(urlCocina)) ? urlCocina : 'latina';
   openCocina(startCocina);
 
-  const carousel = document.getElementById('home-recetas-carousel');
-  if (carousel) {
-    carousel.innerHTML = recetas.map(r => `
-      <div class="card" data-testid="card-receta-${r.id}">
-        <div class="card-img">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="card-body">
-          <span class="badge" style="text-transform: capitalize;">${r.cocina}</span>
-          <h4 style="margin-bottom: 0.5rem;">${r.titulo}</h4>
-          <a href="/recetas/receta.html?id=${r.id}" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;">Ver aplicación →</a>
-        </div>
-      </div>
-    `).join('');
-  }
 }
 
 window.openModal = function() {

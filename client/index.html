@@ -250,27 +250,56 @@
       </div>
     </section>
 
-    <!-- ═══════════ INSPIRACIÓN / RECETAS ═══════════ -->
-    <section class="section-inspiration" data-testid="section-inspiracion">
-      <div class="container reveal">
-        <div class="inspiration-header">
-          <div>
-            <span class="section-label">Tendencias</span>
-            <h2>Inspiración & Aplicaciones</h2>
-            <p class="text-muted">Desarrollo de producto basado en tendencias de mercado.</p>
-          </div>
-          <a href="/recetas/" class="btn btn-outline" data-testid="button-ver-recetas">Ver todas</a>
+    <!-- ═══════════ INSPIRACIÓN / APLICACIONES ═══════════ -->
+    <section class="section-inspo-showcase" data-testid="section-inspiracion">
+      <div class="container">
+        <div class="section-header-centered reveal">
+          <span class="section-label">Tendencias</span>
+          <h2>Inspiración & Aplicaciones</h2>
+          <p class="section-desc">Ideas de producto y aplicaciones reales con nuestros ingredientes. Desarrollo basado en tendencias de mercado.</p>
         </div>
 
-        <div class="filter-chips" id="receta-chips" data-testid="filter-chips">
-          <button class="chip active" data-cocina="todas" data-testid="chip-todas">Todas</button>
-          <button class="chip" data-cocina="latina" data-testid="chip-latina">Latina</button>
-          <button class="chip" data-cocina="arabe" data-testid="chip-arabe">Árabe</button>
-          <button class="chip" data-cocina="asiatica" data-testid="chip-asiatica">Asiática</button>
+        <div class="inspo-showcase reveal" data-testid="inspo-showcase">
+          <a href="/recetas/?cocina=latina" class="inspo-card" data-testid="card-inspo-latina">
+            <div class="inspo-card-img">
+              <img src="/assets/img/inspo-latina.png" alt="Aplicaciones cocina latina" loading="lazy" />
+            </div>
+            <div class="inspo-card-overlay">
+              <span class="inspo-card-badge">Aplicaciones Latina</span>
+              <h3>Cocina Latina</h3>
+              <p>Arepas · Tacos · Feijoada · Guacamole</p>
+              <span class="inspo-card-cta">Ver aplicaciones →</span>
+            </div>
+          </a>
+
+          <a href="/recetas/?cocina=arabe" class="inspo-card" data-testid="card-inspo-arabe">
+            <div class="inspo-card-img">
+              <img src="/assets/img/inspo-arabe.png" alt="Aplicaciones cocina árabe" loading="lazy" />
+            </div>
+            <div class="inspo-card-overlay">
+              <span class="inspo-card-badge">Aplicaciones Árabe</span>
+              <h3>Cocina Árabe</h3>
+              <p>Hummus · Falafel · Shawarma · Mezze</p>
+              <span class="inspo-card-cta">Ver aplicaciones →</span>
+            </div>
+          </a>
+
+          <a href="/recetas/?cocina=asiatica" class="inspo-card" data-testid="card-inspo-asiatica">
+            <div class="inspo-card-img">
+              <img src="/assets/img/inspo-asiatica.png" alt="Aplicaciones cocina asiática" loading="lazy" />
+            </div>
+            <div class="inspo-card-overlay">
+              <span class="inspo-card-badge">Aplicaciones Asiática</span>
+              <h3>Cocina Asiática</h3>
+              <p>Ramen · Pad Thai · Sushi · Dim Sum</p>
+              <span class="inspo-card-cta">Ver aplicaciones →</span>
+            </div>
+          </a>
         </div>
 
-        <div class="carousel-container">
-          <div class="carousel" id="home-recetas-carousel"></div>
+        <div class="inspo-showcase-footer reveal">
+          <a href="/recetas/" class="btn btn-primary" data-testid="button-ver-recetas">Explorar todas las aplicaciones</a>
+          <a href="/contacto.html" class="btn btn-outline" data-testid="button-consultar-aplicacion">Consultar aplicación a medida</a>
         </div>
       </div>
     </section>

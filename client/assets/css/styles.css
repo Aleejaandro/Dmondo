@@ -369,6 +369,108 @@ header {
   margin-top: 2.5rem;
 }
 
+/* INSPIRACIÓN SHOWCASE */
+.section-inspo-showcase {
+  padding: 5rem 0 4rem;
+  background: var(--bg);
+}
+
+.inspo-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 2.5rem;
+}
+
+.inspo-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  min-height: 320px;
+  box-shadow: 0 8px 30px rgba(15,23,42,.10);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.inspo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(15,23,42,.16);
+}
+
+.inspo-card-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.inspo-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.inspo-card:hover .inspo-card-img img {
+  transform: scale(1.06);
+}
+
+.inspo-card-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 28px 24px;
+  background: linear-gradient(to top, rgba(15,23,42,.80) 0%, rgba(15,23,42,.30) 50%, rgba(15,23,42,.03) 100%);
+}
+
+.inspo-card-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: rgba(212,160,23,.85);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.inspo-card-overlay h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.inspo-card-overlay p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,.8);
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+
+.inspo-card-cta {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: var(--transition);
+}
+.inspo-card:hover .inspo-card-cta {
+  color: #fff;
+  letter-spacing: .02em;
+}
+
+.inspo-showcase-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 2.5rem;
+}
+
 /* FAQ */
 .faq-list { margin-top: 2rem; }
 .faq-item {
@@ -1210,6 +1312,8 @@ section {
 @media (max-width: 980px) {
   .cocinas-showcase { grid-template-columns: 1fr; gap: 16px; }
   .cocina-card { min-height: 240px; }
+  .inspo-showcase { grid-template-columns: 1fr; gap: 16px; }
+  .inspo-card { min-height: 220px; }
   .cc-body { grid-template-columns: 1fr; }
   .cc-sidebar {
     border-right: none;
