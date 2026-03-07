@@ -52,6 +52,7 @@
             <div class="cc-main">
               <div class="panel-prods-header">
                 <h3 class="cc-col-title" id="cc-prods-title" data-testid="text-prods-title">Productos Destacados</h3>
+                <span class="cc-prods-count" id="cc-prods-count" data-testid="text-prods-count"></span>
               </div>
               <div id="cc-products-grid" class="products-grid" data-testid="cc-products-grid"></div>
 
@@ -65,6 +66,32 @@
       </div>
     </section>
 
+    <section class="trust-bar" data-testid="section-trust-bar">
+      <div class="container">
+        <div class="trust-items">
+          <div class="trust-item" data-testid="trust-referencias">
+            <span class="trust-num">+200</span>
+            <span class="trust-label">Referencias</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item" data-testid="trust-cert">
+            <span class="trust-num">IFS · BRC</span>
+            <span class="trust-label">Certificaciones</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item" data-testid="trust-fichas">
+            <span class="trust-num">24–48h</span>
+            <span class="trust-label">Fichas técnicas</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item" data-testid="trust-stock">
+            <span class="trust-num">Stock UE</span>
+            <span class="trust-label">Almacén en España</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" style="background: var(--bg);">
       <div class="container" style="max-width: 800px;">
         <div class="section-header-centered">
@@ -72,22 +99,22 @@
           <h2>Preguntas Frecuentes B2B</h2>
         </div>
         <div class="faq-list" data-testid="faq-list">
-          <div class="faq-item" data-testid="faq-moq">
-            <h4>¿Cuál es el pedido mínimo (MOQ)?</h4>
-            <p class="text-muted">Depende del formato y producto. Trabajamos palets completos para industria y cajas/displays para retail. Contacte con ventas para su caso específico.</p>
-          </div>
-          <div class="faq-item" data-testid="faq-private-label">
-            <h4>¿Hacen desarrollo de Private Label (Marca Blanca)?</h4>
-            <p class="text-muted">Sí, gestionamos todo el proceso desde el envasado hasta el etiquetado personalizado para cadenas de supermercados.</p>
-          </div>
-          <div class="faq-item" data-testid="faq-fichas">
-            <h4>¿Proporcionan fichas técnicas y certificados?</h4>
-            <p class="text-muted">Cada lote cuenta con su ficha técnica, alérgenos y certificados de calidad (IFS/BRC/Halal según aplique).</p>
-          </div>
-          <div class="faq-item" data-testid="faq-stock">
-            <h4>¿Tienen stock de seguridad en España/Europa?</h4>
-            <p class="text-muted">Sí, operamos almacenes logísticos que nos permiten garantizar el suministro continuo sin roturas de stock.</p>
-          </div>
+          <details class="faq-accordion" data-testid="faq-moq">
+            <summary>¿Cuál es el pedido mínimo (MOQ)?</summary>
+            <p>Depende del formato y producto. Trabajamos palets completos para industria y cajas/displays para retail. Contacte con ventas para su caso específico.</p>
+          </details>
+          <details class="faq-accordion" data-testid="faq-private-label">
+            <summary>¿Hacen desarrollo de Private Label (Marca Blanca)?</summary>
+            <p>Sí, gestionamos todo el proceso desde el envasado hasta el etiquetado personalizado para cadenas de supermercados.</p>
+          </details>
+          <details class="faq-accordion" data-testid="faq-fichas">
+            <summary>¿Proporcionan fichas técnicas y certificados?</summary>
+            <p>Cada lote cuenta con su ficha técnica, alérgenos y certificados de calidad (IFS/BRC/Halal según aplique).</p>
+          </details>
+          <details class="faq-accordion" data-testid="faq-stock">
+            <summary>¿Tienen stock de seguridad en España/Europa?</summary>
+            <p>Sí, operamos almacenes logísticos que nos permiten garantizar el suministro continuo sin roturas de stock.</p>
+          </details>
         </div>
       </div>
     </section>

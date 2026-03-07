@@ -231,23 +231,28 @@ function renderProducts(cocina, categoriaId, searchQuery) {
     );
   }
 
+  updateProdsCount(prods.length);
+
   if (prods.length === 0) {
     prodGrid.innerHTML = '<p class="cc-no-results">No se encontraron productos.</p>';
     return;
   }
 
   prodGrid.innerHTML = prods.map(p => `
-    <div class="card" data-testid="card-product-${p.id}">
-      <div class="card-img">
+    <div class="card pcard" data-testid="card-product-${p.id}">
+      <div class="card-img pcard-img">
         ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />` : `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
       </div>
       <div class="card-body">
-        <span class="badge">${p.formato}</span>
-        <h4 style="margin-bottom: 0.35rem;">${p.nombre}</h4>
-        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom: 0.75rem;">
-          ${p.etiquetas.map(e => `<span style="font-size:0.75rem; background:var(--bg); padding:0.15rem 0.5rem; border-radius:4px; color:var(--muted);">${e}</span>`).join('')}
+        <span class="pcard-formato">${p.formato}</span>
+        <h4 class="pcard-name">${p.nombre}</h4>
+        <div class="pcard-tags">
+          ${p.etiquetas.map(e => `<span class="pcard-tag pcard-tag--${p.cocina}">${e}</span>`).join('')}
         </div>
-        <a href="/contacto.html" style="font-size:0.85rem; color:var(--primary); font-weight:600; margin-top:auto;" data-testid="link-ficha-${p.id}">Solicitar ficha →</a>
+        <a href="/contacto.html" class="pcard-cta" data-testid="link-ficha-${p.id}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Solicitar ficha
+        </a>
       </div>
     </div>
   `).join('');
@@ -260,6 +265,11 @@ function renderApps(cocina) {
   container.innerHTML = apps.map(a =>
     `<div class="app-bullet"><span class="app-dot"></span> ${a}</div>`
   ).join('');
+}
+
+function updateProdsCount(count) {
+  const counter = document.getElementById('cc-prods-count');
+  if (counter) counter.textContent = `${count} producto${count !== 1 ? 's' : ''}`;
 }
 
 function updateProdsTitle(catName) {
