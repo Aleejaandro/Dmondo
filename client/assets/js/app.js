@@ -27,15 +27,87 @@ const productos = [
 ];
 
 const recetas = [
-  { id: 'r1', titulo: 'Arepas Industriales', cocina: 'latina', imagen: '/assets/img/recetas/r1-arepas.png', desc: 'Arepa de maíz precocida para líneas de food service y retail. Base versátil para rellenos diversos.' },
-  { id: 'r2', titulo: 'Hummus de Garbanzo', cocina: 'arabe', imagen: '/assets/img/recetas/r2-hummus.png', desc: 'Crema de garbanzo con tahini para untables industriales. Alta demanda en retail europeo.' },
-  { id: 'r3', titulo: 'Pad Thai Auténtico', cocina: 'asiatica', imagen: '/assets/img/recetas/r3-padthai.png', desc: 'Noodles de arroz salteados con salsa de tamarindo. Formato wok para HORECA y platos preparados.' },
-  { id: 'r4', titulo: 'Feijoada Base', cocina: 'latina', imagen: '/assets/img/recetas/r4-feijoada.png', desc: 'Guiso brasileño de frijoles negros. Base concentrada para líneas de platos preparados.' },
-  { id: 'r5', titulo: 'Falafel Tradicional', cocina: 'arabe', imagen: '/assets/img/recetas/r5-falafel.png', desc: 'Croqueta de garbanzo especiada. Formato congelado para food service y retail vegano.' },
-  { id: 'r6', titulo: 'Arroz Frito Yangchow', cocina: 'asiatica', imagen: '/assets/img/recetas/r6-arrozfrito.png', desc: 'Arroz salteado con vegetales y proteína. Aplicación estrella para líneas de congelados asiáticos.' },
-  { id: 'r7', titulo: 'Tacos Al Pastor', cocina: 'latina', imagen: '/assets/img/recetas/r7-tacos.png', desc: 'Tortilla de maíz con carne especiada y piña. Formato kit para retail y HORECA.' },
-  { id: 'r8', titulo: 'Shawarma', cocina: 'arabe', imagen: '/assets/img/recetas/r8-shawarma.png', desc: 'Wrap de carne especiada con salsa de ajo. Producto estrella en street food y delivery.' },
-  { id: 'r9', titulo: 'Ramen Tonkotsu', cocina: 'asiatica', imagen: '/assets/img/recetas/r9-ramen.png', desc: 'Caldo de cerdo con noodles, huevo y chashu. Formato bowl para HORECA y meal kits.' }
+  {
+    id: 'r1', titulo: 'Arepas Industriales', cocina: 'latina',
+    imagen: '/assets/img/recetas/r1-arepas.png',
+    desc: 'Arepa de maíz precocida para líneas de food service y retail. Base versátil para rellenos diversos.',
+    contexto: 'La arepa es un pilar de la gastronomía latinoamericana con crecimiento sostenido en Europa. Su formato versátil permite múltiples rellenos y presentaciones, adaptándose tanto a líneas de congelados como a food service.',
+    ingredientes: ['Harina de maíz precocida (25kg)', 'Queso blanco rallado (5kg)', 'Frijoles negros (20kg)'],
+    canales: ['Retail — Congelados', 'HORECA — Brunch & Casual Dining', 'Food Service — Catering'],
+    ventajas: ['Sin gluten de forma natural', 'Alta vida útil en formato congelado', 'Margen atractivo en carta de restaurante']
+  },
+  {
+    id: 'r2', titulo: 'Hummus de Garbanzo', cocina: 'arabe',
+    imagen: '/assets/img/recetas/r2-hummus.png',
+    desc: 'Crema de garbanzo con tahini para untables industriales. Alta demanda en retail europeo.',
+    contexto: 'El hummus se ha consolidado como el untable saludable de referencia en Europa. Su producción industrial requiere garbanzos de calibre específico y tahini de calidad para garantizar textura y sabor consistentes.',
+    ingredientes: ['Garbanzo seco calibre 9mm (25kg)', 'Pasta de tahini (5kg)', 'Comino molido (1kg)', 'Ácido cítrico alimentario'],
+    canales: ['Retail — Untables refrigerados', 'HORECA — Tapas & Mezze', 'Industria — Co-packing'],
+    ventajas: ['Producto vegano y plant-based', 'Tendencia consolidada en Europa', 'Escalable a múltiples sabores']
+  },
+  {
+    id: 'r3', titulo: 'Pad Thai Auténtico', cocina: 'asiatica',
+    imagen: '/assets/img/recetas/r3-padthai.png',
+    desc: 'Noodles de arroz salteados con salsa de tamarindo. Formato wok para HORECA y platos preparados.',
+    contexto: 'El Pad Thai es la puerta de entrada a la cocina tailandesa para el consumidor europeo. Su formato wok permite una preparación rápida en cocina profesional y se adapta perfectamente a líneas de platos preparados.',
+    ingredientes: ['Fideos de arroz (5kg)', 'Pasta de tamarindo (1kg)', 'Salsa de pescado (1L)', 'Cacahuete tostado (5kg)'],
+    canales: ['HORECA — Restaurantes asiáticos', 'Retail — Platos preparados', 'Delivery — Dark kitchens'],
+    ventajas: ['Sin gluten (base de arroz)', 'Preparación en menos de 8 minutos', 'Alto ticket medio en carta']
+  },
+  {
+    id: 'r4', titulo: 'Feijoada Base', cocina: 'latina',
+    imagen: '/assets/img/recetas/r4-feijoada.png',
+    desc: 'Guiso brasileño de frijoles negros. Base concentrada para líneas de platos preparados.',
+    contexto: 'La feijoada es el plato nacional de Brasil y tiene gran potencial en el mercado europeo de platos preparados étnicos. Su formato base concentrada permite a fabricantes añadir proteínas y personalizar según mercado.',
+    ingredientes: ['Frijol negro (20kg)', 'Hoja de laurel (500g)', 'Comino en grano (1kg)', 'Ajo granulado (1kg)'],
+    canales: ['Industria — Platos preparados', 'HORECA — Buffets & Catering', 'Retail — Conservas premium'],
+    ventajas: ['Producto comfort food con identidad', 'Base estable para personalización', 'Rico en proteína vegetal']
+  },
+  {
+    id: 'r5', titulo: 'Falafel Tradicional', cocina: 'arabe',
+    imagen: '/assets/img/recetas/r5-falafel.png',
+    desc: 'Croqueta de garbanzo especiada. Formato congelado para food service y retail vegano.',
+    contexto: 'El falafel se ha convertido en el producto estrella del segmento plant-based en Europa. Su formato congelado IQF permite distribución eficiente y preparación instantánea en HORECA.',
+    ingredientes: ['Garbanzo seco (25kg)', 'Cilantro seco (1kg)', 'Comino molido (1kg)', 'Perejil deshidratado (500g)'],
+    canales: ['Retail — Congelados veganos', 'HORECA — Street food & Casual', 'Industria — IQF'],
+    ventajas: ['100% vegano y plant-based', 'Formato IQF para máxima eficiencia', 'Tendencia creciente en toda Europa']
+  },
+  {
+    id: 'r6', titulo: 'Arroz Frito Yangchow', cocina: 'asiatica',
+    imagen: '/assets/img/recetas/r6-arrozfrito.png',
+    desc: 'Arroz salteado con vegetales y proteína. Aplicación estrella para líneas de congelados asiáticos.',
+    contexto: 'El arroz frito estilo Yangchow es uno de los productos asiáticos congelados con mayor rotación en retail europeo. Su producción industrial requiere arroz de grano largo con bajo contenido de almidón para evitar apelmazamiento.',
+    ingredientes: ['Arroz grano largo (25kg)', 'Salsa de soja (5L)', 'Aceite de sésamo (1L)', 'Jengibre molido (1kg)'],
+    canales: ['Retail — Congelados', 'HORECA — Wok stations', 'Delivery — Meal kits'],
+    ventajas: ['Alta rotación en lineal', 'Coste de producción competitivo', 'Adaptable a múltiples variantes']
+  },
+  {
+    id: 'r7', titulo: 'Tacos Al Pastor', cocina: 'latina',
+    imagen: '/assets/img/recetas/r7-tacos.png',
+    desc: 'Tortilla de maíz con carne especiada y piña. Formato kit para retail y HORECA.',
+    contexto: 'Los tacos al pastor representan la tendencia mexicana más fuerte en Europa. El formato kit (tortillas + salsa + especias) permite a retailers y HORECA ofrecer una experiencia auténtica sin complejidad operativa.',
+    ingredientes: ['Tortilla de maíz (paquete industrial)', 'Chile guajillo seco (1kg)', 'Achiote en pasta (500g)', 'Piña deshidratada (2kg)'],
+    canales: ['Retail — Meal kits', 'HORECA — Taquerías & Casual', 'Food Service — Eventos'],
+    ventajas: ['Formato kit listo para vender', 'Experiencia gastronómica completa', 'Categoría en fuerte crecimiento']
+  },
+  {
+    id: 'r8', titulo: 'Shawarma', cocina: 'arabe',
+    imagen: '/assets/img/recetas/r8-shawarma.png',
+    desc: 'Wrap de carne especiada con salsa de ajo. Producto estrella en street food y delivery.',
+    contexto: 'El shawarma es el producto de street food árabe con mayor penetración en Europa. Su formato wrap permite servicio rápido y es ideal para delivery. La clave está en la mezcla de especias y la salsa de ajo (toum).',
+    ingredientes: ['Mix de especias shawarma (1kg)', 'Pan pita (paquete industrial)', 'Pasta de ajo (2kg)', 'Encurtidos árabes (5kg)'],
+    canales: ['HORECA — Street food & Kebab', 'Delivery — Dark kitchens', 'Retail — Wraps preparados'],
+    ventajas: ['Ticket medio alto en delivery', 'Operación simple y escalable', 'Demanda estable todo el año']
+  },
+  {
+    id: 'r9', titulo: 'Ramen Tonkotsu', cocina: 'asiatica',
+    imagen: '/assets/img/recetas/r9-ramen.png',
+    desc: 'Caldo de cerdo con noodles, huevo y chashu. Formato bowl para HORECA y meal kits.',
+    contexto: 'El ramen ha pasado de nicho a mainstream en Europa. El formato bowl premium permite posicionamiento alto en HORECA y meal kits. La base de caldo concentrado es el componente clave para escalar producción.',
+    ingredientes: ['Fideos ramen (5kg)', 'Pasta de miso (2kg)', 'Salsa de soja oscura (5L)', 'Aceite de sésamo tostado (1L)'],
+    canales: ['HORECA — Ramen bars & Casual', 'Retail — Meal kits premium', 'Industria — Caldos concentrados'],
+    ventajas: ['Posicionamiento premium', 'Formato bowl en tendencia', 'Componentes con alta vida útil']
+  }
 ];
 
 // FUNCIONES CORE
@@ -372,18 +444,110 @@ function initRecipes() {
   render();
 }
 
-// DETALLE RECETA
 function initRecipeDetail() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get('id');
-  
-  if (id) {
-    const receta = recetas.find(r => r.id === id);
-    if (receta) {
-      document.getElementById('receta-titulo').textContent = receta.titulo;
-      document.getElementById('receta-cocina').textContent = receta.cocina;
-    }
-  }
+  const container = document.getElementById('recipe-detail');
+  if (!id || !container) return;
+
+  const receta = recetas.find(r => r.id === id);
+  if (!receta) { container.innerHTML = '<div class="container" style="padding:4rem 0;text-align:center"><h2>Aplicación no encontrada</h2><a href="/recetas/" class="btn btn-primary" style="margin-top:1rem">Volver a Inspiración</a></div>'; return; }
+
+  const related = recetas.filter(r => r.cocina === receta.cocina && r.id !== receta.id).slice(0, 3);
+  const cocinaLabel = { latina: 'Latina', arabe: 'Árabe', asiatica: 'Asiática' }[receta.cocina] || receta.cocina;
+
+  document.title = `${receta.titulo} — Aplicación Industrial | DMONDO`;
+
+  container.innerHTML = `
+    <section class="rd-hero" style="background-image: url('${receta.imagen}');" data-testid="rd-hero">
+      <div class="rd-hero-overlay"></div>
+      <div class="container rd-hero-body">
+        <a href="/recetas/" class="rd-back" data-testid="link-back-recetas">← Volver a Inspiración</a>
+        <span class="rd-badge rd-badge--${receta.cocina}">${cocinaLabel}</span>
+        <h1 data-testid="rd-titulo">${receta.titulo}</h1>
+        <p class="rd-hero-desc">${receta.desc}</p>
+      </div>
+    </section>
+
+    <section class="rd-content">
+      <div class="container">
+        <div class="rd-grid">
+          <div class="rd-main">
+            <div class="rd-section" data-testid="rd-contexto">
+              <div class="rd-section-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </div>
+              <h2>Contexto Industrial</h2>
+              <p>${receta.contexto}</p>
+            </div>
+
+            <div class="rd-section" data-testid="rd-ingredientes">
+              <div class="rd-section-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              </div>
+              <h2>Ingredientes DMONDO</h2>
+              <ul class="rd-ingredients">
+                ${receta.ingredientes.map(i => `<li><span class="rd-check">✓</span>${i}</li>`).join('')}
+              </ul>
+              <a href="/productos/?cocina=${receta.cocina}" class="rd-link" data-testid="link-ver-ingredientes">Ver ingredientes en catálogo →</a>
+            </div>
+          </div>
+
+          <aside class="rd-sidebar">
+            <div class="rd-sidebar-card" data-testid="rd-canales">
+              <h3>Canales de Aplicación</h3>
+              <ul class="rd-channels">
+                ${receta.canales.map(c => {
+                  const [canal, detalle] = c.split(' — ');
+                  return `<li><strong>${canal}</strong><span>${detalle}</span></li>`;
+                }).join('')}
+              </ul>
+            </div>
+            <div class="rd-sidebar-card" data-testid="rd-ventajas">
+              <h3>Ventajas Competitivas</h3>
+              <ul class="rd-advantages">
+                ${receta.ventajas.map(v => `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>${v}</li>`).join('')}
+              </ul>
+            </div>
+            <a href="/contacto.html" class="btn btn-primary rd-sidebar-cta" data-testid="button-contacto-receta">Consultar esta aplicación</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    ${related.length ? `
+    <section class="rd-related" data-testid="rd-related">
+      <div class="container">
+        <h2>Más aplicaciones ${cocinaLabel}s</h2>
+        <div class="recetas-grid" style="max-width:100%">
+          ${related.map(r => `
+            <a href="/recetas/receta.html?id=${r.id}" class="receta-card" data-testid="card-related-${r.id}">
+              <div class="receta-card-img"><img src="${r.imagen}" alt="${r.titulo}" loading="lazy" /></div>
+              <div class="receta-card-body">
+                <span class="receta-card-badge receta-card-badge--${r.cocina}">${r.cocina}</span>
+                <h3>${r.titulo}</h3>
+                <p>${r.desc}</p>
+                <span class="receta-card-cta">Ver aplicación →</span>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    </section>` : ''}
+
+    <section class="section-cta" data-testid="rd-cta-final">
+      <div class="container">
+        <div class="cta-box">
+          <h2>¿Quieres desarrollar ${receta.titulo}?</h2>
+          <p class="text-muted">Nuestro equipo de I+D te asesora en la selección de ingredientes, formulación y formatos industriales.</p>
+          <div class="cta-actions">
+            <a href="/contacto.html" class="btn btn-primary" data-testid="button-contacto-desarrollo">Hablar con I+D</a>
+            <a href="/productos/" class="btn btn-outline" data-testid="button-catalogo-completo">Ver catálogo completo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
 }
 
 // FORMULARIO DE CONTACTO
