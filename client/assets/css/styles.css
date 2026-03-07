@@ -83,10 +83,25 @@ header {
 .logo {
   display: flex;
   align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
 .logo img {
   height: 82px;
   width: auto;
+}
+.logo-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.logo-group-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  line-height: 1;
 }
 
 .nav-links { display: flex; align-items: center; gap: 1.75rem; }
