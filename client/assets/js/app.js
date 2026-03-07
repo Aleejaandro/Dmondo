@@ -459,10 +459,18 @@ function initRecipeDetail() {
   document.title = `${receta.titulo} — Aplicación Industrial | DMONDO`;
 
   container.innerHTML = `
+    <div class="rd-breadcrumb" data-testid="rd-breadcrumb">
+      <div class="container">
+        <a href="/recetas/" data-testid="link-back-recetas">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver a Inspiración
+        </a>
+      </div>
+    </div>
+
     <section class="rd-hero" style="background-image: url('${receta.imagen}');" data-testid="rd-hero">
       <div class="rd-hero-overlay"></div>
       <div class="container rd-hero-body">
-        <a href="/recetas/" class="rd-back" data-testid="link-back-recetas">← Volver a Inspiración</a>
         <span class="rd-badge rd-badge--${receta.cocina}">${cocinaLabel}</span>
         <h1 data-testid="rd-titulo">${receta.titulo}</h1>
         <p class="rd-hero-desc">${receta.desc}</p>
@@ -471,31 +479,42 @@ function initRecipeDetail() {
 
     <section class="rd-content">
       <div class="container">
-        <div class="rd-grid">
-          <div class="rd-main">
-            <div class="rd-section" data-testid="rd-contexto">
-              <div class="rd-section-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-              </div>
-              <h2>Contexto Industrial</h2>
-              <p>${receta.contexto}</p>
-            </div>
+        <div class="rd-ficha">
 
-            <div class="rd-section" data-testid="rd-ingredientes">
-              <div class="rd-section-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <div class="rd-block" data-testid="rd-contexto">
+            <div class="rd-block-header">
+              <span class="rd-block-num">01</span>
+              <div>
+                <h2>Contexto Industrial</h2>
+                <p class="rd-block-sub">Análisis de mercado y oportunidad</p>
               </div>
-              <h2>Ingredientes DMONDO</h2>
-              <ul class="rd-ingredients">
-                ${receta.ingredientes.map(i => `<li><span class="rd-check">✓</span>${i}</li>`).join('')}
-              </ul>
-              <a href="/productos/?cocina=${receta.cocina}" class="rd-link" data-testid="link-ver-ingredientes">Ver ingredientes en catálogo →</a>
             </div>
+            <p class="rd-block-text">${receta.contexto}</p>
           </div>
 
-          <aside class="rd-sidebar">
-            <div class="rd-sidebar-card" data-testid="rd-canales">
-              <h3>Canales de Aplicación</h3>
+          <div class="rd-block" data-testid="rd-ingredientes">
+            <div class="rd-block-header">
+              <span class="rd-block-num">02</span>
+              <div>
+                <h2>Ingredientes DMONDO</h2>
+                <p class="rd-block-sub">Materias primas de nuestro catálogo</p>
+              </div>
+            </div>
+            <ul class="rd-ingredients">
+              ${receta.ingredientes.map(i => `<li><span class="rd-check">✓</span>${i}</li>`).join('')}
+            </ul>
+            <a href="/productos/?cocina=${receta.cocina}" class="rd-link" data-testid="link-ver-ingredientes">Ver ingredientes en catálogo →</a>
+          </div>
+
+          <div class="rd-block-row">
+            <div class="rd-block rd-block--half" data-testid="rd-canales">
+              <div class="rd-block-header">
+                <span class="rd-block-num">03</span>
+                <div>
+                  <h2>Canales</h2>
+                  <p class="rd-block-sub">Dónde aplicar este producto</p>
+                </div>
+              </div>
               <ul class="rd-channels">
                 ${receta.canales.map(c => {
                   const [canal, detalle] = c.split(' — ');
@@ -503,14 +522,26 @@ function initRecipeDetail() {
                 }).join('')}
               </ul>
             </div>
-            <div class="rd-sidebar-card" data-testid="rd-ventajas">
-              <h3>Ventajas Competitivas</h3>
+
+            <div class="rd-block rd-block--half" data-testid="rd-ventajas">
+              <div class="rd-block-header">
+                <span class="rd-block-num">04</span>
+                <div>
+                  <h2>Ventajas</h2>
+                  <p class="rd-block-sub">Diferenciación competitiva</p>
+                </div>
+              </div>
               <ul class="rd-advantages">
                 ${receta.ventajas.map(v => `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>${v}</li>`).join('')}
               </ul>
             </div>
-            <a href="/contacto.html" class="btn btn-primary rd-sidebar-cta" data-testid="button-contacto-receta">Consultar esta aplicación</a>
-          </aside>
+          </div>
+
+          <div class="rd-block-cta">
+            <p>¿Quieres desarrollar esta aplicación con ingredientes DMONDO?</p>
+            <a href="/contacto.html" class="btn btn-primary" data-testid="button-contacto-receta">Consultar con nuestro equipo</a>
+          </div>
+
         </div>
       </div>
     </section>
