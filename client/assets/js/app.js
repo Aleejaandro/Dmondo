@@ -116,12 +116,74 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initSearch();
   initChips();
+  initCustomSelects();
   
   if (document.getElementById('cc-nav')) initHome();
   if (document.getElementById('recipes-grid')) initRecipes();
   if (document.getElementById('recipe-detail')) initRecipeDetail();
   if (document.getElementById('contact-form')) initContactForm();
 });
+
+function initCustomSelects() {
+  document.querySelectorAll('select.form-control').forEach(sel => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-select';
+    
+    const options = Array.from(sel.options);
+    const placeholderText = options[0]?.text || 'Selecciona...';
+    
+    const trigger = document.createElement('div');
+    trigger.className = 'custom-select-trigger is-placeholder';
+    trigger.textContent = placeholderText;
+    trigger.setAttribute('tabindex', '0');
+    
+    const dropdown = document.createElement('div');
+    dropdown.className = 'custom-select-dropdown';
+    
+    options.forEach((opt, i) => {
+      if (i === 0 && !opt.value) return;
+      const item = document.createElement('div');
+      item.className = 'custom-select-option';
+      item.textContent = opt.text;
+      item.dataset.value = opt.value;
+      item.addEventListener('click', () => {
+        sel.value = opt.value;
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        trigger.textContent = opt.text;
+        trigger.classList.remove('is-placeholder');
+        dropdown.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('is-selected'));
+        item.classList.add('is-selected');
+        wrapper.classList.remove('is-open');
+      });
+      dropdown.appendChild(item);
+    });
+    
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.custom-select.is-open').forEach(s => {
+        if (s !== wrapper) s.classList.remove('is-open');
+      });
+      wrapper.classList.toggle('is-open');
+    });
+    
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        trigger.click();
+      }
+    });
+
+    sel.style.display = 'none';
+    sel.parentNode.insertBefore(wrapper, sel);
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(dropdown);
+    wrapper.appendChild(sel);
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select.is-open').forEach(s => s.classList.remove('is-open'));
+  });
+}
 
 // Menú Móvil
 function initMobileMenu() {
