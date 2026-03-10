@@ -2061,9 +2061,35 @@ section {
   .hero-band-inner { gap: 1.25rem; }
   .hero-bullet-sep { display: none; }
 
-  .cc-topbar { flex-direction: column; align-items: stretch; }
+  .cc-topbar { flex-direction: column; align-items: stretch; gap: 1rem; padding: 1rem 1rem; }
+  .cc-search-wrap { flex: 0 0 auto; width: 100%; min-width: 0; }
   .cc-topbar-actions { justify-content: center; flex-wrap: wrap; }
-  .cc-micro { text-align: center; }
+  .cc-micro { text-align: center; margin-top: 0; }
+
+  /* Prioridad: catálogo móvil — selectores más específicos para que no gane otra regla */
+  .section-explorador--page .explorador-shell {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+  .section-explorador--page .explorador-shell .cc-topbar {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .section-explorador--page .explorador-shell .cc-search-wrap {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .section-explorador--page .explorador-shell .cc-search-input {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .section-explorador--page .explorador-shell .cc-topbar-actions .btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   .cc-sidebar { flex-direction: column; }
   .cc-nav-group { min-width: unset; }
   .cc-nav-items { position: static; width: auto; border: none; border-radius: 0; box-shadow: none; }
