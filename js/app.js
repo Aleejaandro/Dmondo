@@ -12,7 +12,8 @@ const categorias = [
 ];
 
 // Base path para recursos (páginas en subcarpetas usan ../)
-const BASE = (() => { const p = window.location.pathname || ''; if (p.includes('/productos/') || p.includes('/recetas/')) return '../'; return ''; })();
+// Base path: '' en raíz, '../' en productos/ o recetas/
+const BASE = (() => { const p = window.location.pathname || ''; if (p.includes('productos') || p.includes('recetas')) return '../'; return ''; })();
 
 const productos = [
   { id: 'p1', nombre: 'Harina de Maíz Precocida', cocina: 'latina', categoria: 'harinas', formato: '25kg', etiquetas: ['sin gluten', 'granel'], imagen: BASE + 'assets/img/products_img/p1-harina-maiz.png' },
@@ -275,7 +276,7 @@ function applySearch() {
 
 function initChips() {}
 
-const isFullCatalog = window.location.pathname.startsWith('/productos');
+const isFullCatalog = (window.location.pathname || '').includes('productos');
 
 function renderProducts(cocina, categoriaId, searchQuery) {
   const prodGrid = document.getElementById('cc-products-grid');
@@ -680,7 +681,7 @@ function initContactForm() {
     };
     
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(BASE + 'api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
