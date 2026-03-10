@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalle de Aplicación | DMONDO</title>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <title>Inspiración y Aplicaciones Industriales | DMONDO</title>
+  <meta name="description" content="Ideas de aplicación, tendencias de mercado y usos industriales de ingredientes étnicos DMONDO. Recetas y formulaciones para retail, HORECA e industria alimentaria.">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
   <header>
     <div class="container nav-container">
       <a href="/" class="logo">
-        <img src="/assets/img/logo.png" alt="D'Mondo Food" />
+        <img src="../assets/logos/logo.png" alt="D'Mondo Food" />
         <span class="logo-group"><span class="logo-group-name">Grupo José Abril</span></span>
       </a>
       <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
@@ -23,7 +24,51 @@
     </div>
   </header>
 
-  <main id="recipe-detail"></main>
+  <main>
+    <section class="inspo-hero" data-testid="section-inspo-hero">
+      <div class="container">
+        <div class="inspo-hero-inner reveal">
+          <span class="section-label">Tendencias & Desarrollo</span>
+          <h1>Inspiración & Aplicaciones</h1>
+          <p class="inspo-hero-desc">Ideas de producto y aplicaciones reales con ingredientes étnicos. Desarrollo basado en tendencias de mercado para retail, industria alimentaria y HORECA.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-recetas" data-testid="section-recetas">
+      <div class="container">
+        <div class="recetas-toolbar reveal" data-testid="recetas-toolbar">
+          <div class="recetas-chips" id="receta-chips-page">
+            <button class="chip active" data-cocina="todas" data-testid="chip-todas">Todas</button>
+            <button class="chip" data-cocina="latina" data-testid="chip-latina">Latina</button>
+            <button class="chip" data-cocina="arabe" data-testid="chip-arabe">Árabe</button>
+            <button class="chip" data-cocina="asiatica" data-testid="chip-asiatica">Asiática</button>
+          </div>
+          <select id="filter-receta-cocina" class="recetas-select" data-testid="select-filter-cocina">
+            <option value="todas">Todas las aplicaciones</option>
+            <option value="latina">Latina</option>
+            <option value="arabe">Árabe</option>
+            <option value="asiatica">Asiática</option>
+          </select>
+        </div>
+
+        <div id="recipes-grid" class="recetas-grid reveal" data-testid="recipes-grid"></div>
+      </div>
+    </section>
+
+    <section class="section-cta" data-testid="section-inspo-cta">
+      <div class="container reveal">
+        <div class="cta-box">
+          <h2>¿Necesitas una formulación a medida?</h2>
+          <p class="text-muted">Nuestro equipo de desarrollo te ayuda a crear aplicaciones con ingredientes étnicos adaptadas a tu línea de producto.</p>
+          <div class="cta-actions">
+            <a href="/contacto.html" class="btn btn-primary" data-testid="button-contacto-formulacion">Consultar aplicación</a>
+            <a href="/productos/" class="btn btn-outline" data-testid="button-ver-ingredientes">Ver ingredientes disponibles</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer data-testid="footer">
     <div class="footer-accent"></div>
@@ -31,7 +76,7 @@
       <div class="footer-grid">
         <div class="footer-col footer-col--brand">
           <div class="footer-logo">
-            <img src="/assets/img/logo.png" alt="D'Mondo Food" />
+            <img src="../assets/logos/logo.png" alt="D'Mondo Food" />
             <span class="footer-logo-group">Grupo José Abril</span>
           </div>
           <p class="footer-desc">Importación y distribución B2B de ingredientes étnicos premium para profesionales de la alimentación.</p>
@@ -80,6 +125,6 @@
     </div>
   </footer>
 
-  <script type="module" src="/assets/js/app.js"></script>
+  <script type="module" src="../js/app.js"></script>
 </body>
 </html>

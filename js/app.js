@@ -11,25 +11,28 @@ const categorias = [
   { id: 'fideos', nombre: 'Fideos', cocina: 'asiatica', micro: 'De arroz, trigo y soba' }
 ];
 
+// Base path para recursos (páginas en subcarpetas usan ../)
+const BASE = (() => { const p = window.location.pathname || ''; if (p.includes('/productos/') || p.includes('/recetas/')) return '../'; return ''; })();
+
 const productos = [
-  { id: 'p1', nombre: 'Harina de Maíz Precocida', cocina: 'latina', categoria: 'harinas', formato: '25kg', etiquetas: ['sin gluten', 'granel'], imagen: '/assets/img/products/p1-harina-maiz.png' },
-  { id: 'p2', nombre: 'Frijol Negro', cocina: 'latina', categoria: 'frijoles', formato: '10kg / 25kg', etiquetas: ['natural', 'horeca'], imagen: '/assets/img/products/p2-frijol-negro.png' },
-  { id: 'p3', nombre: 'Ají Amarillo Pasta', cocina: 'latina', categoria: 'conservas-lat', formato: 'Cubo 3kg', etiquetas: ['horeca'], imagen: '/assets/img/products/p3-aji-amarillo.png' },
-  { id: 'p4', nombre: 'Frijol Rojo', cocina: 'latina', categoria: 'frijoles', formato: '10kg', etiquetas: ['natural'], imagen: '/assets/img/products/p4-frijol-rojo.png' },
-  { id: 'p5', nombre: 'Ras el Hanout', cocina: 'arabe', categoria: 'especias', formato: '1kg / 5kg', etiquetas: ['mezcla', 'horeca'], imagen: '/assets/img/products/p5-ras-el-hanout.png' },
-  { id: 'p6', nombre: 'Garbanzo Pedrosillano', cocina: 'arabe', categoria: 'legumbres', formato: '25kg', etiquetas: ['natural', 'granel'], imagen: '/assets/img/products/p6-garbanzo.png' },
-  { id: 'p7', nombre: 'Pasta de Sésamo (Tahini)', cocina: 'arabe', categoria: 'conservas-ar', formato: 'Cubo 5kg', etiquetas: ['horeca', 'vegan'], imagen: '/assets/img/products/p7-tahini.png' },
-  { id: 'p8', nombre: 'Comino Molido', cocina: 'arabe', categoria: 'especias', formato: '5kg', etiquetas: ['puro'], imagen: '/assets/img/products/p8-comino.png' },
-  { id: 'p9', nombre: 'Arroz Jazmín', cocina: 'asiatica', categoria: 'arroces', formato: '20kg', etiquetas: ['premium', 'granel'], imagen: '/assets/img/products/p9-arroz-jazmin.png' },
-  { id: 'p10', nombre: 'Salsa de Soja Oscura', cocina: 'asiatica', categoria: 'salsas', formato: 'Garrafa 10L', etiquetas: ['horeca', 'fermentado'], imagen: '/assets/img/products/p10-salsa-soja.png' },
-  { id: 'p11', nombre: 'Fideos de Arroz', cocina: 'asiatica', categoria: 'fideos', formato: 'Caja 5kg', etiquetas: ['sin gluten', 'horeca'], imagen: '/assets/img/products/p11-fideos-arroz.png' },
-  { id: 'p12', nombre: 'Arroz Glutinoso', cocina: 'asiatica', categoria: 'arroces', formato: '20kg', etiquetas: ['premium'], imagen: '/assets/img/products/p12-arroz-glutinoso.png' }
+  { id: 'p1', nombre: 'Harina de Maíz Precocida', cocina: 'latina', categoria: 'harinas', formato: '25kg', etiquetas: ['sin gluten', 'granel'], imagen: BASE + 'assets/img/products_img/p1-harina-maiz.png' },
+  { id: 'p2', nombre: 'Frijol Negro', cocina: 'latina', categoria: 'frijoles', formato: '10kg / 25kg', etiquetas: ['natural', 'horeca'], imagen: BASE + 'assets/img/products_img/p2-frijol-negro.png' },
+  { id: 'p3', nombre: 'Ají Amarillo Pasta', cocina: 'latina', categoria: 'conservas-lat', formato: 'Cubo 3kg', etiquetas: ['horeca'], imagen: BASE + 'assets/img/products_img/p3-aji-amarillo.png' },
+  { id: 'p4', nombre: 'Frijol Rojo', cocina: 'latina', categoria: 'frijoles', formato: '10kg', etiquetas: ['natural'], imagen: BASE + 'assets/img/products_img/p4-frijol-rojo.png' },
+  { id: 'p5', nombre: 'Ras el Hanout', cocina: 'arabe', categoria: 'especias', formato: '1kg / 5kg', etiquetas: ['mezcla', 'horeca'], imagen: BASE + 'assets/img/products_img/p5-ras-el-hanout.png' },
+  { id: 'p6', nombre: 'Garbanzo Pedrosillano', cocina: 'arabe', categoria: 'legumbres', formato: '25kg', etiquetas: ['natural', 'granel'], imagen: BASE + 'assets/img/products_img/p6-garbanzo.png' },
+  { id: 'p7', nombre: 'Pasta de Sésamo (Tahini)', cocina: 'arabe', categoria: 'conservas-ar', formato: 'Cubo 5kg', etiquetas: ['horeca', 'vegan'], imagen: BASE + 'assets/img/products_img/p7-tahini.png' },
+  { id: 'p8', nombre: 'Comino Molido', cocina: 'arabe', categoria: 'especias', formato: '5kg', etiquetas: ['puro'], imagen: BASE + 'assets/img/products_img/p8-comino.png' },
+  { id: 'p9', nombre: 'Arroz Jazmín', cocina: 'asiatica', categoria: 'arroces', formato: '20kg', etiquetas: ['premium', 'granel'], imagen: BASE + 'assets/img/products_img/p9-arroz-jazmin.png' },
+  { id: 'p10', nombre: 'Salsa de Soja Oscura', cocina: 'asiatica', categoria: 'salsas', formato: 'Garrafa 10L', etiquetas: ['horeca', 'fermentado'], imagen: BASE + 'assets/img/products_img/p10-salsa-soja.png' },
+  { id: 'p11', nombre: 'Fideos de Arroz', cocina: 'asiatica', categoria: 'fideos', formato: 'Caja 5kg', etiquetas: ['sin gluten', 'horeca'], imagen: BASE + 'assets/img/products_img/p11-fideos-arroz.png' },
+  { id: 'p12', nombre: 'Arroz Glutinoso', cocina: 'asiatica', categoria: 'arroces', formato: '20kg', etiquetas: ['premium'], imagen: BASE + 'assets/img/products_img/p12-arroz-glutinoso.png' }
 ];
 
 const recetas = [
   {
     id: 'r1', titulo: 'Arepas Industriales', cocina: 'latina',
-    imagen: '/assets/img/recetas/r1-arepas.png',
+    imagen: BASE + 'assets/img/recetas_img/r1-arepas.png',
     desc: 'Arepa de maíz precocida para líneas de food service y retail. Base versátil para rellenos diversos.',
     contexto: 'La arepa es un pilar de la gastronomía latinoamericana con crecimiento sostenido en Europa. Su formato versátil permite múltiples rellenos y presentaciones, adaptándose tanto a líneas de congelados como a food service.',
     ingredientes: ['Harina de maíz precocida (25kg)', 'Queso blanco rallado (5kg)', 'Frijoles negros (20kg)'],
@@ -38,7 +41,7 @@ const recetas = [
   },
   {
     id: 'r2', titulo: 'Hummus de Garbanzo', cocina: 'arabe',
-    imagen: '/assets/img/recetas/r2-hummus.png',
+    imagen: BASE + 'assets/img/recetas_img/r2-hummus.png',
     desc: 'Crema de garbanzo con tahini para untables industriales. Alta demanda en retail europeo.',
     contexto: 'El hummus se ha consolidado como el untable saludable de referencia en Europa. Su producción industrial requiere garbanzos de calibre específico y tahini de calidad para garantizar textura y sabor consistentes.',
     ingredientes: ['Garbanzo seco calibre 9mm (25kg)', 'Pasta de tahini (5kg)', 'Comino molido (1kg)', 'Ácido cítrico alimentario'],
@@ -47,7 +50,7 @@ const recetas = [
   },
   {
     id: 'r3', titulo: 'Pad Thai Auténtico', cocina: 'asiatica',
-    imagen: '/assets/img/recetas/r3-padthai.png',
+    imagen: BASE + 'assets/img/recetas_img/r3-padthai.png',
     desc: 'Noodles de arroz salteados con salsa de tamarindo. Formato wok para HORECA y platos preparados.',
     contexto: 'El Pad Thai es la puerta de entrada a la cocina tailandesa para el consumidor europeo. Su formato wok permite una preparación rápida en cocina profesional y se adapta perfectamente a líneas de platos preparados.',
     ingredientes: ['Fideos de arroz (5kg)', 'Pasta de tamarindo (1kg)', 'Salsa de pescado (1L)', 'Cacahuete tostado (5kg)'],
@@ -56,7 +59,7 @@ const recetas = [
   },
   {
     id: 'r4', titulo: 'Feijoada Base', cocina: 'latina',
-    imagen: '/assets/img/recetas/r4-feijoada.png',
+    imagen: BASE + 'assets/img/recetas_img/r4-feijoada.png',
     desc: 'Guiso brasileño de frijoles negros. Base concentrada para líneas de platos preparados.',
     contexto: 'La feijoada es el plato nacional de Brasil y tiene gran potencial en el mercado europeo de platos preparados étnicos. Su formato base concentrada permite a fabricantes añadir proteínas y personalizar según mercado.',
     ingredientes: ['Frijol negro (20kg)', 'Hoja de laurel (500g)', 'Comino en grano (1kg)', 'Ajo granulado (1kg)'],
@@ -65,7 +68,7 @@ const recetas = [
   },
   {
     id: 'r5', titulo: 'Falafel Tradicional', cocina: 'arabe',
-    imagen: '/assets/img/recetas/r5-falafel.png',
+    imagen: BASE + 'assets/img/recetas_img/r5-falafel.png',
     desc: 'Croqueta de garbanzo especiada. Formato congelado para food service y retail vegano.',
     contexto: 'El falafel se ha convertido en el producto estrella del segmento plant-based en Europa. Su formato congelado IQF permite distribución eficiente y preparación instantánea en HORECA.',
     ingredientes: ['Garbanzo seco (25kg)', 'Cilantro seco (1kg)', 'Comino molido (1kg)', 'Perejil deshidratado (500g)'],
@@ -74,7 +77,7 @@ const recetas = [
   },
   {
     id: 'r6', titulo: 'Arroz Frito Yangchow', cocina: 'asiatica',
-    imagen: '/assets/img/recetas/r6-arrozfrito.png',
+    imagen: BASE + 'assets/img/recetas_img/r6-arrozfrito.png',
     desc: 'Arroz salteado con vegetales y proteína. Aplicación estrella para líneas de congelados asiáticos.',
     contexto: 'El arroz frito estilo Yangchow es uno de los productos asiáticos congelados con mayor rotación en retail europeo. Su producción industrial requiere arroz de grano largo con bajo contenido de almidón para evitar apelmazamiento.',
     ingredientes: ['Arroz grano largo (25kg)', 'Salsa de soja (5L)', 'Aceite de sésamo (1L)', 'Jengibre molido (1kg)'],
@@ -83,7 +86,7 @@ const recetas = [
   },
   {
     id: 'r7', titulo: 'Tacos Al Pastor', cocina: 'latina',
-    imagen: '/assets/img/recetas/r7-tacos.png',
+    imagen: BASE + 'assets/img/recetas_img/r7-tacos.png',
     desc: 'Tortilla de maíz con carne especiada y piña. Formato kit para retail y HORECA.',
     contexto: 'Los tacos al pastor representan la tendencia mexicana más fuerte en Europa. El formato kit (tortillas + salsa + especias) permite a retailers y HORECA ofrecer una experiencia auténtica sin complejidad operativa.',
     ingredientes: ['Tortilla de maíz (paquete industrial)', 'Chile guajillo seco (1kg)', 'Achiote en pasta (500g)', 'Piña deshidratada (2kg)'],
@@ -92,7 +95,7 @@ const recetas = [
   },
   {
     id: 'r8', titulo: 'Shawarma', cocina: 'arabe',
-    imagen: '/assets/img/recetas/r8-shawarma.png',
+    imagen: BASE + 'assets/img/recetas_img/r8-shawarma.png',
     desc: 'Wrap de carne especiada con salsa de ajo. Producto estrella en street food y delivery.',
     contexto: 'El shawarma es el producto de street food árabe con mayor penetración en Europa. Su formato wrap permite servicio rápido y es ideal para delivery. La clave está en la mezcla de especias y la salsa de ajo (toum).',
     ingredientes: ['Mix de especias shawarma (1kg)', 'Pan pita (paquete industrial)', 'Pasta de ajo (2kg)', 'Encurtidos árabes (5kg)'],
@@ -101,7 +104,7 @@ const recetas = [
   },
   {
     id: 'r9', titulo: 'Ramen Tonkotsu', cocina: 'asiatica',
-    imagen: '/assets/img/recetas/r9-ramen.png',
+    imagen: BASE + 'assets/img/recetas_img/r9-ramen.png',
     desc: 'Caldo de cerdo con noodles, huevo y chashu. Formato bowl para HORECA y meal kits.',
     contexto: 'El ramen ha pasado de nicho a mainstream en Europa. El formato bowl premium permite posicionamiento alto en HORECA y meal kits. La base de caldo concentrado es el componente clave para escalar producción.',
     ingredientes: ['Fideos ramen (5kg)', 'Pasta de miso (2kg)', 'Salsa de soja oscura (5L)', 'Aceite de sésamo tostado (1L)'],
@@ -311,7 +314,7 @@ function renderProducts(cocina, categoriaId, searchQuery) {
         <div class="pcard-tags">
           ${p.etiquetas.map(e => `<span class="pcard-tag pcard-tag--${p.cocina}">${e}</span>`).join('')}
         </div>
-        <a href="/contacto.html" class="pcard-cta" data-testid="link-ficha-${p.id}">
+        <a href="${BASE}contacto.html" class="pcard-cta" data-testid="link-ficha-${p.id}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Solicitar ficha
         </a>
@@ -483,7 +486,7 @@ function initRecipes() {
     const filtered = sc === 'todas' ? recetas : recetas.filter(r => r.cocina === sc);
     
     grid.innerHTML = filtered.map(r => `
-      <a href="/recetas/receta.html?id=${r.id}" class="receta-card" data-testid="card-receta-${r.id}">
+      <a href="${BASE}recetas/receta.html?id=${r.id}" class="receta-card" data-testid="card-receta-${r.id}">
         <div class="receta-card-img">
           <img src="${r.imagen}" alt="${r.titulo}" loading="lazy" />
         </div>
@@ -523,7 +526,7 @@ function initRecipeDetail() {
   if (!id || !container) return;
 
   const receta = recetas.find(r => r.id === id);
-  if (!receta) { container.innerHTML = '<div class="container" style="padding:4rem 0;text-align:center"><h2>Aplicación no encontrada</h2><a href="/recetas/" class="btn btn-primary" style="margin-top:1rem">Volver a Inspiración</a></div>'; return; }
+  if (!receta) { container.innerHTML = '<div class="container" style="padding:4rem 0;text-align:center"><h2>Aplicación no encontrada</h2><a href="' + BASE + 'recetas/" class="btn btn-primary" style="margin-top:1rem">Volver a Inspiración</a></div>'; return; }
 
   const related = recetas.filter(r => r.cocina === receta.cocina && r.id !== receta.id).slice(0, 3);
   const cocinaLabel = { latina: 'Latina', arabe: 'Árabe', asiatica: 'Asiática' }[receta.cocina] || receta.cocina;
@@ -533,7 +536,7 @@ function initRecipeDetail() {
   container.innerHTML = `
     <div class="rd-breadcrumb" data-testid="rd-breadcrumb">
       <div class="container">
-        <a href="/recetas/" data-testid="link-back-recetas">
+        <a href="${BASE}recetas/" data-testid="link-back-recetas">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
           Volver a Inspiración
         </a>
@@ -575,7 +578,7 @@ function initRecipeDetail() {
             <ul class="rd-ingredients">
               ${receta.ingredientes.map(i => `<li><span class="rd-check">✓</span>${i}</li>`).join('')}
             </ul>
-            <a href="/productos/?cocina=${receta.cocina}" class="rd-link" data-testid="link-ver-ingredientes">Ver ingredientes en catálogo →</a>
+            <a href="${BASE}productos/?cocina=${receta.cocina}" class="rd-link" data-testid="link-ver-ingredientes">Ver ingredientes en catálogo →</a>
           </div>
 
           <div class="rd-block-row">
@@ -611,7 +614,7 @@ function initRecipeDetail() {
 
           <div class="rd-block-cta">
             <p>¿Quieres desarrollar esta aplicación con ingredientes DMONDO?</p>
-            <a href="/contacto.html" class="btn btn-primary" data-testid="button-contacto-receta">Consultar con nuestro equipo</a>
+            <a href="${BASE}contacto.html" class="btn btn-primary" data-testid="button-contacto-receta">Consultar con nuestro equipo</a>
           </div>
 
         </div>
@@ -624,7 +627,7 @@ function initRecipeDetail() {
         <h2>Más aplicaciones ${cocinaLabel}s</h2>
         <div class="recetas-grid" style="max-width:100%">
           ${related.map(r => `
-            <a href="/recetas/receta.html?id=${r.id}" class="receta-card" data-testid="card-related-${r.id}">
+            <a href="${BASE}recetas/receta.html?id=${r.id}" class="receta-card" data-testid="card-related-${r.id}">
               <div class="receta-card-img"><img src="${r.imagen}" alt="${r.titulo}" loading="lazy" /></div>
               <div class="receta-card-body">
                 <span class="receta-card-badge receta-card-badge--${r.cocina}">${r.cocina}</span>
@@ -644,8 +647,8 @@ function initRecipeDetail() {
           <h2>¿Quieres desarrollar ${receta.titulo}?</h2>
           <p class="text-muted">Nuestro equipo de I+D te asesora en la selección de ingredientes, formulación y formatos industriales.</p>
           <div class="cta-actions">
-            <a href="/contacto.html" class="btn btn-primary" data-testid="button-contacto-desarrollo">Hablar con I+D</a>
-            <a href="/productos/" class="btn btn-outline" data-testid="button-catalogo-completo">Ver catálogo completo</a>
+            <a href="${BASE}contacto.html" class="btn btn-primary" data-testid="button-contacto-desarrollo">Hablar con I+D</a>
+            <a href="${BASE}productos/" class="btn btn-outline" data-testid="button-catalogo-completo">Ver catálogo completo</a>
           </div>
         </div>
       </div>
